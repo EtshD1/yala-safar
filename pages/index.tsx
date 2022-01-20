@@ -44,7 +44,7 @@ const Property = ({
 				<Image src={Star} />
 				<Image src={Star} />
 			</div>
-			<div className={styles.price}>200£/night</div>
+			<div className={styles.price}>{price}£/night</div>
 		</div>
 	);
 };
