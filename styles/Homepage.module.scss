@@ -3,8 +3,11 @@
 .search {
 	padding-top: 4.75rem;
 	background-color: $primary-color;
-	@include container;
 	padding-bottom: 1rem;
+
+	div {
+		@include container;
+	}
 
 	h3 {
 		font-size: 1.5rem;
@@ -42,4 +45,79 @@
 			}
 		}
 	}
+}
+
+.verticalScroll {
+	display: flex;
+	overflow-y: hidden;
+	overflow-x: auto;
+	scrollbar-width: none;
+	gap: 1rem;
+
+	&::-webkit-scrollbar {
+		width: 0;
+	}
+}
+
+.label {
+	display: flex;
+	height: 2.5rem;
+	align-items: center;
+	justify-content: space-between;
+
+	h3 {
+		font-size: 1.1rem;
+		font-family: Comfortaa;
+		font-weight: 700;
+	}
+
+	div {
+		color: #231840cc;
+		text-decoration: underline;
+	}
+}
+
+.areas {
+	& > div {
+		@include container;
+	}
+
+	.area,
+	.property {
+		.image {
+			width: 9rem;
+			border: 2px solid gray;
+			display: flex;
+			border-radius: 0.5rem;
+			height: 6rem;
+
+			.Img {
+				object-fit: cover;
+				width: 100%;
+			}
+		}
+
+		.name {
+			font-weight: 700;
+			font-size: 1.1rem;
+			margin: 0.25rem 0;
+		}
+	}
+
+	.property {
+		.rating {
+			display: flex;
+			gap: 0.25rem;
+		}
+
+		.price {
+			height: 1.25rem;
+			display: flex;
+			align-items: center;
+		}
+	}
+}
+
+.container {
+	@include container;
 }
