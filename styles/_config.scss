@@ -1,0 +1,8 @@
+$primary-color: #7750d8;
+
+@mixin container {
+	max-width: 50rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	margin: 0 auto;
+}

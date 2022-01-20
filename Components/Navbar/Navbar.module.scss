@@ -1,18 +1,25 @@
+@import "../../styles/_config";
+
 .header {
-	background-color: #7750d8;
+	background-color: $primary-color;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
 
 	.navbar {
-		padding: 1rem 0.5rem;
-		box-shadow: 0 0 3px #000000;
+		height: 3.75rem;
 		display: flex;
 		justify-content: space-between;
 		display: flex;
 		align-items: center;
+		@include container;
 
 		.logo {
 			font-size: 1.5rem;
 			font-weight: bold;
 			color: #fff;
+			font-family: Comfortaa;
 		}
 	}
 }

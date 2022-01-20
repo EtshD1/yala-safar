@@ -1,0 +1,45 @@
+@import "./_config";
+
+.search {
+	padding-top: 4.75rem;
+	background-color: $primary-color;
+	@include container;
+	padding-bottom: 1rem;
+
+	h3 {
+		font-size: 1.5rem;
+		font-weight: bold;
+		color: #fff;
+		margin-bottom: 0.25rem;
+	}
+
+	p {
+		color: #fff;
+		margin-bottom: 0.5rem;
+	}
+
+	.inputField {
+		padding: 0.5rem;
+		background-color: #f2a31d;
+
+		label {
+			display: flex;
+			background-color: #fff;
+
+			input {
+				font-size: 1rem;
+				flex-grow: 1;
+				background: none;
+				border: none;
+				font-family: Cairo;
+				outline: none;
+			}
+
+			div {
+				padding: 0 0.25rem;
+				display: flex;
+				align-items: center;
+			}
+		}
+	}
+}

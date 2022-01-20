@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="14.174" height="13.707" viewBox="0 0 14.174 13.707">
+  <g id="Search_Icon" data-name="Search Icon" opacity="0.5">
+    <g id="Ellipse_1" data-name="Ellipse 1" fill="none" stroke="#231840" stroke-width="2">
+      <circle cx="5.719" cy="5.719" r="5.719" stroke="none"/>
+      <circle cx="5.719" cy="5.719" r="4.719" fill="none"/>
+    </g>
+    <line id="Line_16" data-name="Line 16" x2="3.121" y2="3.121" transform="translate(9.346 8.879)" fill="none" stroke="#231840" stroke-width="1"/>
+    <line id="Line_17" data-name="Line 17" x2="3.121" y2="3.121" transform="translate(10.346 9.879)" fill="none" stroke="#231840" stroke-width="2"/>
+  </g>
+</svg>
