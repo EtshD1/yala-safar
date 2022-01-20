@@ -1,0 +1,31 @@
+@font-face {
+	font-family: Cairo;
+	src: url(../assets/fonts/Cairo/Cairo-Regular.ttf);
+}
+
+@font-face {
+	font-family: Cairo;
+	src: url(../assets/fonts/Cairo/Cairo-Bold.ttf);
+	font-weight: 700;
+}
+
+@font-face {
+	font-family: Cairo;
+	src: url(../assets/fonts/Cairo/Cairo-Light.ttf);
+	font-weight: 300;
+}
+
+@font-face {
+	font-family: Comfortaa;
+	src: url(../assets/fonts/Comfortaa/Comfortaa-Regular.ttf);
+}
+
+@font-face {
+	font-family: Comfortaa;
+	src: url(../assets/fonts/Comfortaa/Comfortaa-Bold.ttf);
+	font-weight: 700;
+}
+
+#App {
+	font-family: Cairo;
+}
