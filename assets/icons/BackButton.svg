@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="29.925" height="24.849" viewBox="0 0 29.925 24.849">
+  <g id="Back_Button" data-name="Back Button" transform="translate(0 0)">
+    <path id="Line_2" data-name="Line 2" d="M15,0H2A2,2,0,0,0,2,4H15a2,2,0,0,0,0-4Z" transform="translate(27.096 14.849) rotate(-135)" fill="#231840"/>
+    <path id="Line_3" data-name="Line 3" d="M0,2H25a2,2,0,0,0,2-2,2,2,0,0,0-2-2H0A2,2,0,0,0-2,0,2,2,0,0,0,0,2Z" transform="translate(2 12.425)" fill="#231840"/>
+    <path id="Line_4" data-name="Line 4" d="M15,0H2A2,2,0,0,0,2,4H15a2,2,0,0,0,0-4Z" transform="translate(29.925 12.828) rotate(135)" fill="#231840"/>
+  </g>
+</svg>

@@ -23,3 +23,99 @@
 		}
 	}
 }
+
+#menu {
+	padding: 2rem 1rem;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 100vh;
+	right: 0;
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	z-index: 2;
+	font-size: 1.25rem;
+	transition: left 0.5s ease;
+
+	&.active,
+	&.focus {
+		left: 0;
+	}
+
+	.back {
+		display: flex;
+		align-items: center;
+		text-decoration: underline;
+		gap: 0.5rem;
+		justify-content: flex-end;
+	}
+
+	.navLink {
+		font-size: 1.5rem;
+		padding: 0.5rem 1.5rem;
+		margin-bottom: 0.5rem;
+		display: flex;
+		align-items: center;
+
+		.line {
+			height: 2px;
+			background-color: #000;
+			width: 0;
+			margin-top: 0.2rem;
+
+			transition: width 1s ease 0.2s;
+		}
+
+		&:hover {
+			.line {
+				transition: width 0.5s ease;
+				width: 100%;
+			}
+		}
+
+		&.purple {
+			color: $primary-color;
+			.line {
+				background-color: $primary-color;
+			}
+		}
+	}
+
+	.profile {
+		display: flex;
+		gap: 0.75rem;
+		justify-content: space-between;
+
+		div {
+			display: flex;
+			align-items: center;
+		}
+
+		.info {
+			display: flex;
+			justify-content: space-around;
+			flex-direction: column;
+			align-items: flex-start;
+			flex-grow: 1;
+
+			.email {
+				font-size: 0.9rem;
+				opacity: 0.5;
+			}
+		}
+
+		.pic {
+			height: 3.5rem;
+			width: 3.5rem;
+			border-radius: 100%;
+			overflow: hidden;
+			display: flex;
+
+			img {
+				object-fit: cover;
+			}
+		}
+	}
+}

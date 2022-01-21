@@ -1,12 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Navbar from "../Components/Navbar/Navbar";
+import Navbar from "../Components/Navbar";
 import styles from "../styles/Homepage.module.scss";
 import Icon from "../assets/icons/Search.svg";
 import Star from "../assets/icons/Star.svg";
 import Image from "next/image";
 import CairoJpg from "../assets/Images/cairo.jpg";
 import Chalet from "../assets/Images/chalet1.jpg";
+import VerticalScroll from "../Components/VerticalScroll";
 
 const Area = ({ image, name }: { name: string; image: StaticImageData }) => {
 	return (
@@ -83,19 +84,19 @@ const Home: NextPage = () => {
 					<h3>Popular Areas</h3>
 					<div>View All</div>
 				</div>
-				<div className={styles.verticalScroll}>
+				<VerticalScroll>
 					<Area image={CairoJpg} name="Cairo" />
 					<Area image={CairoJpg} name="Cairo" />
 					<Area image={CairoJpg} name="Cairo" />
 					<Area image={CairoJpg} name="Cairo" />
-				</div>
+				</VerticalScroll>
 			</div>
 			<div className={styles.areas}>
 				<div className={styles.label}>
 					<h3>Suggested Stays</h3>
 					<div>View All</div>
 				</div>
-				<div className={styles.verticalScroll}>
+				<VerticalScroll>
 					<Property
 						image={Chalet}
 						location="Cairo"
@@ -120,7 +121,7 @@ const Home: NextPage = () => {
 						price={200}
 						rating={5}
 					/>
-				</div>
+				</VerticalScroll>
 			</div>
 		</div>
 	);

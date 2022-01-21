@@ -47,18 +47,6 @@
 	}
 }
 
-.verticalScroll {
-	display: flex;
-	overflow-y: hidden;
-	overflow-x: auto;
-	scrollbar-width: none;
-	gap: 1rem;
-
-	&::-webkit-scrollbar {
-		width: 0;
-	}
-}
-
 .label {
 	display: flex;
 	height: 2.5rem;
