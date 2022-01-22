@@ -47,6 +47,15 @@
 	}
 }
 
+.areas {
+	border-bottom: 1px solid gray;
+	padding-bottom: 1rem;
+
+	& > div {
+		@include container;
+	}
+}
+
 .label {
 	display: flex;
 	height: 2.5rem;
@@ -65,50 +74,6 @@
 	}
 }
 
-.areas {
-	border-bottom: 1px solid gray;
-	padding-bottom: 1rem;
-
-	& > div {
-		@include container;
-	}
-
-	.area,
-	.property {
-		.image {
-			width: 9rem;
-			border: 2px solid gray;
-			display: flex;
-			border-radius: 0.5rem;
-			height: 6rem;
-
-			.Img {
-				object-fit: cover;
-				width: 100%;
-			}
-		}
-
-		.name {
-			font-weight: 700;
-			font-size: 1.1rem;
-			margin: 0.25rem 0;
-		}
-	}
-
-	.property {
-		.rating {
-			display: flex;
-			gap: 0.25rem;
-		}
-
-		.price {
-			height: 1.25rem;
-			display: flex;
-			align-items: center;
-		}
-	}
-}
-
 .container {
 	@include container;
 }
@@ -120,29 +85,7 @@
 			flex-direction: row;
 			justify-content: space-between;
 		}
-		.area,
-		.property {
-			display: flex;
-
-			.image {
-				width: 12.5rem;
-				height: 8rem;
-			}
-
-			.info {
-				padding-left: 0.5rem;
-				font-size: 1.25rem;
-				display: flex;
-				flex-direction: column;
-				justify-content: space-around;
-
-				.name {
-					font-size: 1.75rem;
-				}
-			}
-		}
 	}
-
 	.label {
 		height: 5rem;
 		h3 {

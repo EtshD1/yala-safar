@@ -3,56 +3,12 @@ import Head from "next/head";
 import Navbar from "../Components/Navbar";
 import styles from "../styles/Homepage.module.scss";
 import Icon from "../assets/icons/Search.svg";
-import Star from "../assets/icons/Star.svg";
 import Image from "next/image";
 import CairoJpg from "../assets/Images/cairo.jpg";
 import Chalet from "../assets/Images/chalet1.jpg";
 import VerticalScroll from "../Components/VerticalScroll";
-
-const Area = ({ image, name }: { name: string; image: StaticImageData }) => {
-	return (
-		<div className={styles.area}>
-			<div className={styles.image}>
-				<Image className={styles.Img} src={image} />
-			</div>
-			<div className={styles.info}>
-				<div className={styles.name}>{name}</div>
-				<div>526 Properties</div>
-			</div>
-		</div>
-	);
-};
-
-const Property = ({
-	image,
-	location,
-	price,
-	rating,
-}: {
-	location: string;
-	rating: number;
-	price: number;
-	image: StaticImageData;
-}) => {
-	return (
-		<div className={styles.property}>
-			<div className={styles.image}>
-				<Image className={styles.Img} src={image} />
-			</div>
-			<div className={styles.info}>
-				<div className={styles.name}>{location}</div>
-				<div className={styles.rating}>
-					<Image src={Star} />
-					<Image src={Star} />
-					<Image src={Star} />
-					<Image src={Star} />
-					<Image src={Star} />
-				</div>
-				<div className={styles.price}>{price}£/night</div>
-			</div>
-		</div>
-	);
-};
+import Property from "../Components/Areas/Property";
+import Area from "../Components/Areas/Area";
 
 const Home: NextPage = () => {
 	return (
