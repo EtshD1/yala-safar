@@ -22,6 +22,81 @@
 			font-family: Comfortaa;
 		}
 	}
+
+	.desktopLinks {
+		display: none;
+
+		.pic {
+			margin-left: 0.5rem;
+			border-radius: 100%;
+			padding: 2px;
+			border: 2px solid #fff;
+			cursor: pointer;
+
+			div {
+				border-radius: 100%;
+				height: 2rem;
+				width: 2rem;
+				display: flex;
+				align-items: center;
+				overflow: hidden;
+			}
+		}
+
+		.navLink {
+			cursor: pointer;
+			font-size: 1rem;
+			padding: 0.75rem 1rem;
+			display: flex;
+			align-items: center;
+			margin: 0;
+
+			&.purple {
+				background: #fff;
+
+				border-radius: 2rem;
+			}
+		}
+	}
+}
+
+.navLink {
+	font-size: 1.5rem;
+	padding: 0.5rem 1.5rem;
+	margin-bottom: 0.5rem;
+	display: flex;
+	align-items: center;
+
+	.line {
+		height: 2px;
+		background-color: #000;
+		width: 0;
+		position: relative;
+		top: 0.4rem;
+		margin-top: -0.2rem;
+		transition: width 1s ease 0.2s;
+	}
+
+	&:hover {
+		.line {
+			transition: width 0.5s ease;
+			width: 100%;
+		}
+	}
+
+	&.purple {
+		color: $primary-color;
+		.line {
+			background-color: $primary-color;
+		}
+	}
+
+	&.white {
+		color: #fff;
+		.line {
+			background-color: #fff;
+		}
+	}
 }
 
 #menu {
@@ -29,19 +104,17 @@
 	position: fixed;
 	top: 0;
 	bottom: 0;
-	left: 100vh;
-	right: 0;
+	right: -100vw;
+	left: 100vw;
 	background-color: #fff;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	z-index: 2;
 	font-size: 1.25rem;
-	transition: left 0.5s ease;
 
-	&.active,
-	&.focus {
-		left: 0;
+	&.active {
+		animation: show 0.5s 0.1s ease forwards;
 	}
 
 	.back {
@@ -50,37 +123,6 @@
 		text-decoration: underline;
 		gap: 0.5rem;
 		justify-content: flex-end;
-	}
-
-	.navLink {
-		font-size: 1.5rem;
-		padding: 0.5rem 1.5rem;
-		margin-bottom: 0.5rem;
-		display: flex;
-		align-items: center;
-
-		.line {
-			height: 2px;
-			background-color: #000;
-			width: 0;
-			margin-top: 0.2rem;
-
-			transition: width 1s ease 0.2s;
-		}
-
-		&:hover {
-			.line {
-				transition: width 0.5s ease;
-				width: 100%;
-			}
-		}
-
-		&.purple {
-			color: $primary-color;
-			.line {
-				background-color: $primary-color;
-			}
-		}
 	}
 
 	.profile {
@@ -116,6 +158,34 @@
 			img {
 				object-fit: cover;
 			}
+		}
+	}
+}
+
+@keyframes show {
+	0% {
+		left: 100vw;
+		right: -100vw;
+	}
+
+	100% {
+		left: 0vw;
+		right: 0vw;
+	}
+}
+
+@media (min-width: 50rem) {
+	#menu {
+		display: none;
+	}
+
+	.burger {
+		display: none;
+	}
+
+	.header {
+		.desktopLinks {
+			display: flex;
 		}
 	}
 }

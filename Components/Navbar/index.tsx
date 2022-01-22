@@ -8,13 +8,18 @@ import Image from "next/image";
 const NavLink = ({
 	label,
 	purple = false,
+	white = false,
 }: {
 	label: string;
 	purple?: boolean;
+	white?: boolean;
 }) => {
 	return (
 		<div
-			className={[styles.navLink, purple ? styles.purple : ""].join(" ")}
+			className={[
+				styles.navLink,
+				purple ? styles.purple : white ? styles.white : "",
+			].join(" ")}
 		>
 			<div>
 				<div>{label}</div>
@@ -32,9 +37,11 @@ const Navbar = () => {
 		if (menu) {
 			setShown(true);
 		} else {
-			setTimeout(() => {
+			const to = setTimeout(() => {
 				setShown(false);
-			}, 1000);
+			}, 500);
+
+			return () => clearTimeout(to);
 		}
 	});
 
@@ -47,7 +54,7 @@ const Navbar = () => {
 			<header className={styles.header}>
 				<div className={styles.navbar}>
 					<div className={styles.logo}>Yala Safar</div>
-					<div onClick={ToggleMenu}>
+					<div onClick={ToggleMenu} className={styles.burger}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="29"
@@ -92,34 +99,49 @@ const Navbar = () => {
 							</g>
 						</svg>
 					</div>
-				</div>
-			</header>
-			<div id={styles.menu} className={menu ? styles.active : ""}>
-				<div>
-					<div className={styles.back} onClick={ToggleMenu}>
-						Back
-						<Image src={BackIcon} />
-					</div>
-					<NavLink label="Home" />
-					<NavLink label="Reservations" />
-					<NavLink label="Messages" />
-					<NavLink label="Your Properties" purple />
-				</div>
-				<div className={styles.profile}>
-					<div className={styles.pic}>
-						<Image src={userImg} />
-					</div>
-					<div className={styles.info}>
-						<div>Sara Joesph</div>
-						<div className={styles.email}>
-							sara.joesph@gmail.com
+					<div className={styles.desktopLinks}>
+						<NavLink white label="Home" />
+						<NavLink white label="Reservations" />
+						<NavLink white label="Messages" />
+						<NavLink label="Your Properties" purple />
+						<div className={styles.pic}>
+							<div>
+								<Image src={userImg} />
+							</div>
 						</div>
 					</div>
+				</div>
+			</header>
+			{shown ? (
+				<div id={styles.menu} className={menu ? styles.active : ""}>
 					<div>
-						<Image src={Gear} />
+						<div className={styles.back} onClick={ToggleMenu}>
+							Back
+							<Image src={BackIcon} />
+						</div>
+						<NavLink label="Home" />
+						<NavLink label="Reservations" />
+						<NavLink label="Messages" />
+						<NavLink label="Your Properties" purple />
+					</div>
+					<div className={styles.profile}>
+						<div className={styles.pic}>
+							<Image src={userImg} />
+						</div>
+						<div className={styles.info}>
+							<div>Sara Joesph</div>
+							<div className={styles.email}>
+								sara.joesph@gmail.com
+							</div>
+						</div>
+						<div>
+							<Image src={Gear} />
+						</div>
 					</div>
 				</div>
-			</div>
+			) : (
+				""
+			)}
 		</>
 	);
 };
