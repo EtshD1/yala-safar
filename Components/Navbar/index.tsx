@@ -4,28 +4,33 @@ import BackIcon from "../../assets/icons/BackButton.svg";
 import Gear from "../../assets/icons/Gear.svg";
 import userImg from "../../assets/Images/user.jpg";
 import Image from "next/image";
+import Link from "next/link";
 
 const NavLink = ({
 	label,
 	purple = false,
 	white = false,
+	href,
 }: {
+	href: string;
 	label: string;
 	purple?: boolean;
 	white?: boolean;
 }) => {
 	return (
-		<div
-			className={[
-				styles.navLink,
-				purple ? styles.purple : white ? styles.white : "",
-			].join(" ")}
-		>
-			<div>
-				<div>{label}</div>
-				<div className={styles.line}></div>
+		<Link href={href}>
+			<div
+				className={[
+					styles.navLink,
+					purple ? styles.purple : white ? styles.white : "",
+				].join(" ")}
+			>
+				<div>
+					<div>{label}</div>
+					<div className={styles.line}></div>
+				</div>
 			</div>
-		</div>
+		</Link>
 	);
 };
 
@@ -100,10 +105,10 @@ const Navbar = () => {
 						</svg>
 					</div>
 					<div className={styles.desktopLinks}>
-						<NavLink white label="Home" />
-						<NavLink white label="Reservations" />
-						<NavLink white label="Messages" />
-						<NavLink label="Your Properties" purple />
+						<NavLink href="/" white label="Home" />
+						<NavLink href="/" white label="Reservations" />
+						<NavLink href="/" white label="Messages" />
+						<NavLink href="/" label="Your Properties" purple />
 						<div className={styles.pic}>
 							<div>
 								<Image src={userImg} />
@@ -119,10 +124,10 @@ const Navbar = () => {
 							Back
 							<Image src={BackIcon} />
 						</div>
-						<NavLink label="Home" />
-						<NavLink label="Reservations" />
-						<NavLink label="Messages" />
-						<NavLink label="Your Properties" purple />
+						<NavLink href="/" label="Home" />
+						<NavLink href="/" label="Reservations" />
+						<NavLink href="/" label="Messages" />
+						<NavLink href="/" label="Your Properties" purple />
 					</div>
 					<div className={styles.profile}>
 						<div className={styles.pic}>
