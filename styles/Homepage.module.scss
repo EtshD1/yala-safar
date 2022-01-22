@@ -66,6 +66,9 @@
 }
 
 .areas {
+	border-bottom: 1px solid gray;
+	padding-bottom: 1rem;
+
 	& > div {
 		@include container;
 	}
@@ -108,4 +111,49 @@
 
 .container {
 	@include container;
+}
+
+@media (min-width: 50rem) {
+	.areas {
+		& > div {
+			flex-wrap: wrap;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+		.area,
+		.property {
+			display: flex;
+
+			.image {
+				width: 12.5rem;
+				height: 8rem;
+			}
+
+			.info {
+				padding-left: 0.5rem;
+				font-size: 1.25rem;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+
+				.name {
+					font-size: 1.75rem;
+				}
+			}
+		}
+	}
+
+	.label {
+		height: 5rem;
+		h3 {
+			font-size: 1.75rem;
+			font-family: Comfortaa;
+			font-weight: 700;
+		}
+
+		div {
+			color: #231840cc;
+			text-decoration: underline;
+		}
+	}
 }

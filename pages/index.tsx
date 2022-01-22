@@ -15,8 +15,10 @@ const Area = ({ image, name }: { name: string; image: StaticImageData }) => {
 			<div className={styles.image}>
 				<Image className={styles.Img} src={image} />
 			</div>
-			<div className={styles.name}>{name}</div>
-			<div>526 Properties</div>
+			<div className={styles.info}>
+				<div className={styles.name}>{name}</div>
+				<div>526 Properties</div>
+			</div>
 		</div>
 	);
 };
@@ -37,15 +39,17 @@ const Property = ({
 			<div className={styles.image}>
 				<Image className={styles.Img} src={image} />
 			</div>
-			<div className={styles.name}>{location}</div>
-			<div className={styles.rating}>
-				<Image src={Star} />
-				<Image src={Star} />
-				<Image src={Star} />
-				<Image src={Star} />
-				<Image src={Star} />
+			<div className={styles.info}>
+				<div className={styles.name}>{location}</div>
+				<div className={styles.rating}>
+					<Image src={Star} />
+					<Image src={Star} />
+					<Image src={Star} />
+					<Image src={Star} />
+					<Image src={Star} />
+				</div>
+				<div className={styles.price}>{price}£/night</div>
 			</div>
-			<div className={styles.price}>{price}£/night</div>
 		</div>
 	);
 };
@@ -85,7 +89,7 @@ const Home: NextPage = () => {
 					<div>View All</div>
 				</div>
 				<VerticalScroll>
-					<Area image={CairoJpg} name="Cairo" />
+					<Area image={CairoJpg} name="North Coast" />
 					<Area image={CairoJpg} name="Cairo" />
 					<Area image={CairoJpg} name="Cairo" />
 					<Area image={CairoJpg} name="Cairo" />
