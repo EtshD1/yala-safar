@@ -1,0 +1,10 @@
+@import "./config";
+
+.container {
+	@include container;
+	padding-top: 4.75rem;
+
+	& > div {
+		flex-wrap: wrap;
+	}
+}

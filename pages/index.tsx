@@ -9,6 +9,7 @@ import Chalet from "../assets/Images/chalet1.jpg";
 import VerticalScroll from "../Components/VerticalScroll";
 import Property from "../Components/Areas/Property";
 import Area from "../Components/Areas/Area";
+import Link from "next/link";
 
 const Home: NextPage = () => {
 	return (
@@ -42,7 +43,9 @@ const Home: NextPage = () => {
 			<div className={styles.areas}>
 				<div className={styles.label}>
 					<h3>Popular Areas</h3>
-					<div>View All</div>
+					<div>
+						<Link href="/areas">View All</Link>
+					</div>
 				</div>
 				<VerticalScroll>
 					<Area image={CairoJpg} name="North Coast" />
@@ -54,7 +57,9 @@ const Home: NextPage = () => {
 			<div className={styles.areas}>
 				<div className={styles.label}>
 					<h3>Suggested Stays</h3>
-					<div>View All</div>
+					<div>
+						<Link href="/properties">View All</Link>
+					</div>
 				</div>
 				<VerticalScroll>
 					<Property
