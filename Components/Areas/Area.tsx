@@ -1,10 +1,18 @@
 import Image from "next/image";
 import styles from "./styles.module.scss";
 
-const Area = ({ image, name }: { name: string; image: StaticImageData }) => {
+const Area = ({
+	image,
+	name,
+	view,
+}: {
+	view?: boolean;
+	name: string;
+	image: StaticImageData;
+}) => {
 	return (
 		<div className={styles.area}>
-			<div className={styles.image}>
+			<div className={[styles.image, view ? styles.unset : ""].join(" ")}>
 				<Image className={styles.Img} src={image} />
 			</div>
 			<div className={styles.info}>

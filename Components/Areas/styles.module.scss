@@ -35,6 +35,16 @@
 	}
 }
 
+@media (max-width: 50rem) {
+	.area,
+	.property {
+		.image.unset {
+			width: unset;
+			height: unset;
+		}
+	}
+}
+
 @media (min-width: 50rem) {
 	.area,
 	.property {

@@ -13,80 +13,96 @@ const Properties = () => {
 			</Head>
 			<Navbar />
 			<div className={styles.container}>
+				<div>
+					<h1>Explore Egypt</h1>
+				</div>
 				<VerticalScroll>
 					<Property
+						view
 						image={chalet1}
 						price={199}
 						location="Cairo"
 						rating={5}
 					/>
 					<Property
+						view
 						image={chalet1}
 						price={199}
 						location="Cairo"
 						rating={5}
 					/>
 					<Property
+						view
 						image={chalet1}
 						price={199}
 						location="Cairo"
 						rating={5}
 					/>
 					<Property
+						view
 						image={chalet1}
 						price={199}
 						location="Cairo"
 						rating={5}
 					/>
 					<Property
+						view
 						image={chalet1}
 						price={199}
 						location="Cairo"
 						rating={5}
 					/>
 					<Property
+						view
 						image={chalet1}
 						price={199}
 						location="Cairo"
 						rating={5}
 					/>
 					<Property
+						view
 						image={chalet1}
 						price={199}
 						location="Cairo"
 						rating={5}
 					/>
 					<Property
+						view
 						image={chalet1}
 						price={199}
 						location="Cairo"
 						rating={5}
 					/>
 					<Property
+						view
 						image={chalet1}
 						price={199}
 						location="Cairo"
 						rating={5}
 					/>
 					<Property
+						view
 						image={chalet1}
 						price={199}
 						location="Cairo"
 						rating={5}
 					/>
 					<Property
+						view
 						image={chalet1}
 						price={199}
 						location="Cairo"
 						rating={5}
 					/>
 					<Property
+						view
 						image={chalet1}
 						price={199}
 						location="Cairo"
 						rating={5}
 					/>
 					<Property
+						view
 						image={chalet1}
 						price={199}
 						location="Cairo"

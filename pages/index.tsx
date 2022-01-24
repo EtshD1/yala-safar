@@ -66,19 +66,19 @@ const Home: NextPage = () => {
 						image={Chalet}
 						location="Cairo"
 						price={200}
-						rating={5}
+						rating={4}
 					/>
 					<Property
 						image={Chalet}
 						location="Cairo"
 						price={200}
-						rating={5}
+						rating={3}
 					/>
 					<Property
 						image={Chalet}
 						location="Cairo"
 						price={200}
-						rating={5}
+						rating={2}
 					/>
 					<Property
 						image={Chalet}

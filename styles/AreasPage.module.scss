@@ -4,7 +4,12 @@
 	@include container;
 	padding-top: 4.75rem;
 
+	h1 {
+		font-size: 2rem;
+		margin-bottom: 1rem;
+	}
+
 	& > div {
-		flex-wrap: wrap;
+		flex-direction: column;
 	}
 }

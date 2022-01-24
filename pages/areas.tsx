@@ -17,12 +17,15 @@ const Areas = () => {
 			</Head>
 			<Navbar />
 			<div className={styles.container}>
+				<div>
+					<h1>Explore Egypt</h1>
+				</div>
 				<VerticalScroll>
-					<Area image={cairo} name="Cairo" />
-					<Area image={alex} name="Alexandria" />
-					<Area image={hurghada} name="Hurghada" />
-					<Area image={northCoast} name="North Coast" />
-					<Area image={giza} name="Giza" />
+					<Area view image={cairo} name="Cairo" />
+					<Area view image={alex} name="Alexandria" />
+					<Area view image={hurghada} name="Hurghada" />
+					<Area view image={northCoast} name="North Coast" />
+					<Area view image={giza} name="Giza" />
 				</VerticalScroll>
 			</div>
 		</div>
