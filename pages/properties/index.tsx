@@ -1,9 +1,9 @@
 import Head from "next/head";
-import Navbar from "../Components/Navbar";
-import VerticalScroll from "../Components/VerticalScroll";
-import styles from "../styles/AreasPage.module.scss";
-import Property from "../Components/Areas/Property";
-import chalet1 from "../assets/Images/chalet1.jpg";
+import Navbar from "../../Components/Navbar";
+import VerticalScroll from "../../Components/VerticalScroll";
+import styles from "../../styles/AreasPage.module.scss";
+import Property from "../../Components/Areas/Property";
+import chalet1 from "../../assets/Images/chalet1.jpg";
 
 const Properties = () => {
 	return (
