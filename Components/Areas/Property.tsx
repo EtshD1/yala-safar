@@ -18,10 +18,10 @@ const Property = ({
 }) => {
 	const stars = [];
 	for (let i = 0; i < rating; i++) {
-		stars.push(<Image src={Star} />);
+		stars.push(<Image key={i} src={Star} />);
 	}
 	for (let i = rating; i < 5; i++) {
-		stars.push(<Image src={HollowStar} />);
+		stars.push(<Image key={i} src={HollowStar} />);
 	}
 	return (
 		<div className={styles.property}>

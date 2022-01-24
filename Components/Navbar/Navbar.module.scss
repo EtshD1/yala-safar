@@ -113,9 +113,10 @@
 	justify-content: space-between;
 	z-index: 2;
 	font-size: 1.25rem;
+	animation: hide 0.25s ease forwards;
 
 	&.active {
-		animation: show 0.5s 0.1s ease forwards;
+		animation: show 0.5s ease forwards;
 	}
 
 	.back {
@@ -172,6 +173,18 @@
 	100% {
 		left: 0vw;
 		right: 0vw;
+	}
+}
+
+@keyframes hide {
+	0% {
+		left: 0vw;
+		right: 0vw;
+	}
+
+	100% {
+		left: 100vw;
+		right: -100vw;
 	}
 }
 

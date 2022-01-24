@@ -1,13 +1,13 @@
 import Head from "next/head";
-import Area from "../Components/Areas/Area";
-import Navbar from "../Components/Navbar";
-import VerticalScroll from "../Components/VerticalScroll";
-import cairo from "../assets/Images/cairo.jpg";
-import giza from "../assets/Images/pyramids.jpg";
-import alex from "../assets/Images/alexandria.jpg";
-import northCoast from "../assets/Images/northcoast.jpg";
-import hurghada from "../assets/Images/hurghada.jpg";
-import styles from "../styles/AreasPage.module.scss";
+import Area from "../../Components/Areas/Area";
+import Navbar from "../../Components/Navbar";
+import VerticalScroll from "../../Components/VerticalScroll";
+import cairo from "../../assets/Images/cairo.jpg";
+import giza from "../../assets/Images/pyramids.jpg";
+import alex from "../../assets/Images/alexandria.jpg";
+import northCoast from "../../assets/Images/northcoast.jpg";
+import hurghada from "../../assets/Images/hurghada.jpg";
+import styles from "../../styles/AreasPage.module.scss";
 
 const Areas = () => {
 	return (
