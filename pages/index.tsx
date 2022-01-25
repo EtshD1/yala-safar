@@ -5,6 +5,7 @@ import styles from "../styles/Homepage.module.scss";
 import Icon from "../assets/icons/Search.svg";
 import Image from "next/image";
 import CairoJpg from "../assets/Images/cairo.jpg";
+import NorthCoast from "../assets/Images/northcoast.jpg";
 import Chalet from "../assets/Images/chalet1.jpg";
 import VerticalScroll from "../Components/VerticalScroll";
 import Property from "../Components/Areas/Property";
@@ -48,7 +49,7 @@ const Home: NextPage = () => {
 					</div>
 				</div>
 				<VerticalScroll>
-					<Area image={CairoJpg} name="North Coast" />
+					<Area image={NorthCoast} name="North Coast" />
 					<Area image={CairoJpg} name="Cairo" />
 					<Area image={CairoJpg} name="Cairo" />
 					<Area image={CairoJpg} name="Cairo" />

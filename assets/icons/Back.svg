@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="Back" transform="translate(-30 -30)">
+    <path id="Path_4" data-name="Path 4" d="M20,0A20,20,0,1,1,0,20,20,20,0,0,1,20,0Z" transform="translate(30 30)" fill="rgba(0,0,0,0.5)"/>
+    <path id="Icon_awesome-arrow-left" data-name="Icon awesome-arrow-left" d="M10.395,19.1l-.9.9a.965.965,0,0,1-1.369,0L.281,12.149a.965.965,0,0,1,0-1.369L8.13,2.932a.965.965,0,0,1,1.369,0l.9.9a.97.97,0,0,1-.016,1.385L5.513,9.848h11.6a.967.967,0,0,1,.969.969v1.292a.967.967,0,0,1-.969.969H5.513l4.865,4.635A.963.963,0,0,1,10.395,19.1Z" transform="translate(40.959 38.537)" fill="#fff"/>
+  </g>
+</svg>
