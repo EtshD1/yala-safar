@@ -25,45 +25,47 @@ const Property = () => {
 						</div>
 					</div>
 				</div>
-				<div className={styles.info}>
-					<div className={styles.rating_location}>
-						<div>
-							<div className={styles.icon}>
-								<Image src={Location} />
-							</div>
+				<div>
+					<div className={styles.info}>
+						<div className={styles.rating_location}>
 							<div>
-								<div className={styles.heading}>
-									North Coast
+								<div className={styles.icon}>
+									<Image src={Location} />
 								</div>
 								<div>
-									<div>City Name</div>
-									<div>1234 Street Name</div>
+									<div className={styles.heading}>
+										North Coast
+									</div>
+									<div>
+										<div>City Name</div>
+										<div>1234 Street Name</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<div className={styles.icon}>
+									<Image src={Star} />
+								</div>
+								<div>
+									<div className={styles.heading}>4.9</div>
+									<div>Rating</div>
 								</div>
 							</div>
 						</div>
-						<div>
-							<div className={styles.icon}>
-								<Image src={Star} />
-							</div>
-							<div>
-								<div className={styles.heading}>4.9</div>
-								<div>Rating</div>
-							</div>
+					</div>
+					<div className={styles.offers}>
+						<div>What this place offers</div>
+						<div className={styles.perks}>
+							<div>Wifi</div>
+							<div>Park</div>
+							<div>Pool</div>
+							<div>Beach</div>
 						</div>
 					</div>
-				</div>
-				<div className={styles.offers}>
-					<div>What this place offers</div>
-					<div className={styles.perks}>
-						<div>Wifi</div>
-						<div>Park</div>
-						<div>Pool</div>
-						<div>Beach</div>
+					<div className={styles.cta}>
+						<div>Contact Owner</div>
+						<div className={styles.book}>Book Now</div>
 					</div>
-				</div>
-				<div className={styles.cta}>
-					<div>Contact Owner</div>
-					<div className={styles.book}>Book Now</div>
 				</div>
 			</div>
 		</div>

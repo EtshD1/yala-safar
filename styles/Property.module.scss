@@ -8,10 +8,13 @@
 	align-items: center;
 	position: relative;
 
+	& > div {
+		width: 100%;
+	}
+
 	.preview {
 		margin-top: 1rem;
 		position: relative;
-		width: 100%;
 		background-color: gray;
 		overflow: hidden;
 		border-radius: 1rem;
@@ -57,8 +60,6 @@
 	}
 
 	.info {
-		width: 100%;
-
 		.rating_location {
 			margin-top: 1rem;
 			display: flex;
@@ -95,7 +96,6 @@
 
 	.offers {
 		margin-top: 1rem;
-		width: 100%;
 
 		.perks {
 			margin-top: 0.5rem;
@@ -134,6 +134,17 @@
 			background-color: #37a2ff;
 			border-color: #37a2ff;
 			color: #fff;
+		}
+	}
+}
+
+@media (min-width: 50rem) {
+	.container {
+		flex-direction: row;
+		gap: 0.75rem;
+
+		& > div {
+			width: unset;
 		}
 	}
 }
