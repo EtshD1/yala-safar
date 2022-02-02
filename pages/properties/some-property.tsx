@@ -1,6 +1,6 @@
 import Navbar from "../../Components/Navbar";
 import styles from "../../styles/Property.module.scss";
-import Image from "next/image";
+// import Image from "next/image";
 import chalet1 from "../../assets/Images/chalet1.jpg";
 import Back from "../../assets/icons/Back.svg";
 import Star from "../../assets/icons/Star.svg";
@@ -12,11 +12,13 @@ const Property = () => {
 			<Navbar />
 			<div className={styles.container}>
 				<div className={styles.preview}>
-					<Image src={chalet1} className={styles.bg} />
+					<div className={styles.bg}>
+						<img src={chalet1.src} />
+					</div>
 					<div className={styles.info}>
 						<div className={styles.back}>
 							<div>
-								<Image src={Back} />
+								<img src={Back.src} />
 							</div>
 						</div>
 						<div>
@@ -30,7 +32,7 @@ const Property = () => {
 						<div className={styles.rating_location}>
 							<div>
 								<div className={styles.icon}>
-									<Image src={Location} />
+									<img src={Location.src} />
 								</div>
 								<div>
 									<div className={styles.heading}>
@@ -44,7 +46,7 @@ const Property = () => {
 							</div>
 							<div>
 								<div className={styles.icon}>
-									<Image src={Star} />
+									<img src={Star.src} />
 								</div>
 								<div>
 									<div className={styles.heading}>4.9</div>

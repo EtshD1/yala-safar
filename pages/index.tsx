@@ -3,7 +3,7 @@ import Head from "next/head";
 import Navbar from "../Components/Navbar";
 import styles from "../styles/Homepage.module.scss";
 import Icon from "../assets/icons/Search.svg";
-import Image from "next/image";
+// import Image from "next/image";
 import CairoJpg from "../assets/Images/cairo.jpg";
 import NorthCoast from "../assets/Images/northcoast.jpg";
 import Chalet from "../assets/Images/chalet1.jpg";
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
 					<div className={styles.inputField}>
 						<label>
 							<div>
-								<Image src={Icon} />
+								<img src={Icon.src} />
 							</div>
 							<input
 								type="text"

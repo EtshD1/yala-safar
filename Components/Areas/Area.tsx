@@ -1,4 +1,5 @@
-import Image from "next/image";
+// import Image from "next/image";
+import Link from "next/link";
 import styles from "./styles.module.scss";
 
 const Area = ({
@@ -11,15 +12,21 @@ const Area = ({
 	image: StaticImageData;
 }) => {
 	return (
-		<div className={styles.area}>
-			<div className={[styles.image, view ? styles.unset : ""].join(" ")}>
-				<Image className={styles.Img} src={image} />
+		<Link href="/properties">
+			<div className={styles.area}>
+				<div
+					className={[styles.image, view ? styles.unset : ""].join(
+						" "
+					)}
+				>
+					<img className={styles.Img} src={image.src} />
+				</div>
+				<div className={styles.info}>
+					<div className={styles.name}>{name}</div>
+					<div>526 Properties</div>
+				</div>
 			</div>
-			<div className={styles.info}>
-				<div className={styles.name}>{name}</div>
-				<div>526 Properties</div>
-			</div>
-		</div>
+		</Link>
 	);
 };
 
