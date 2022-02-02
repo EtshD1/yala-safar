@@ -1,10 +1,14 @@
+// import Image from "next/image";
+import Link from "next/link";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import styles from "./Navbar.module.scss";
 import BackIcon from "../../assets/icons/BackButton.svg";
 import Gear from "../../assets/icons/Gear.svg";
 import userImg from "../../assets/Images/user.jpg";
-import Image from "next/image";
-import Link from "next/link";
+import { Toggle_Auth_Form } from "../../redux/actions/forms";
 
 const NavLink = ({
 	label,
@@ -37,6 +41,8 @@ const NavLink = ({
 const Navbar = () => {
 	const [menu, setMenu] = useState(false);
 	const [shown, setShown] = useState(false);
+	const [user, loading, error] = useAuthState(getAuth());
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (menu) {
@@ -52,6 +58,10 @@ const Navbar = () => {
 
 	const ToggleMenu = () => {
 		setMenu((ps) => !ps);
+	};
+
+	const toggleForm = () => {
+		dispatch(Toggle_Auth_Form());
 	};
 
 	return (
@@ -106,14 +116,47 @@ const Navbar = () => {
 					</div>
 					<div className={styles.desktopLinks}>
 						<NavLink href="/" white label="Home" />
-						<NavLink href="/" white label="Reservations" />
-						<NavLink href="/" white label="Messages" />
-						<NavLink href="/" label="Your Properties" purple />
-						<div className={styles.pic}>
-							<div>
-								<Image src={userImg} />
+						{user ? (
+							<>
+								<NavLink href="/" white label="Reservations" />
+								<NavLink href="/" white label="Messages" />
+								<NavLink
+									href="/"
+									label="Your Properties"
+									purple
+								/>
+								<div className={styles.pic}>
+									<div>
+										<img
+											src={
+												user.photoURL
+													? user.photoURL
+													: ""
+											}
+											alt="User Image"
+										/>
+									</div>
+								</div>
+							</>
+						) : loading ? (
+							<div className={styles.userLoading}>
+								<div></div>
+								<div></div>
+								<div></div>
 							</div>
-						</div>
+						) : (
+							<>
+								<div
+									className={[
+										styles.navLink,
+										styles.purple,
+									].join(" ")}
+									onClick={toggleForm}
+								>
+									Sign In
+								</div>
+							</>
+						)}
 					</div>
 				</div>
 			</header>
@@ -122,27 +165,39 @@ const Navbar = () => {
 					<div>
 						<div className={styles.back} onClick={ToggleMenu}>
 							Back
-							<Image src={BackIcon} />
+							<img src={BackIcon.src} />
 						</div>
 						<NavLink href="/" label="Home" />
 						<NavLink href="/" label="Reservations" />
 						<NavLink href="/" label="Messages" />
 						<NavLink href="/" label="Your Properties" purple />
 					</div>
-					<div className={styles.profile}>
-						<div className={styles.pic}>
-							<Image src={userImg} />
-						</div>
-						<div className={styles.info}>
-							<div>Sara Joesph</div>
-							<div className={styles.email}>
-								sara.joesph@gmail.com
+					{user ? (
+						<div className={styles.profile}>
+							<div className={styles.pic}>
+								<img
+									src={user.photoURL ? user.photoURL : ""}
+									alt="User Image"
+								/>
+							</div>
+							<div className={styles.info}>
+								<div>{user.displayName}</div>
+								<div className={styles.email}>{user.email}</div>
+							</div>
+							<div>
+								<img src={Gear.src} />
 							</div>
 						</div>
-						<div>
-							<Image src={Gear} />
+					) : (
+						<div
+							className={[styles.navLink, styles.purple].join(
+								" "
+							)}
+							onClick={toggleForm}
+						>
+							Sign In
 						</div>
-					</div>
+					)}
 				</div>
 			) : (
 				""
