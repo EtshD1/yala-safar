@@ -5,7 +5,6 @@ import {
 } from "react-firebase-hooks/auth";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { getAuth, ProviderId } from "firebase/auth";
-import { signOut } from "firebase/auth";
 import styles from "./styles.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
@@ -18,8 +17,6 @@ const Authentication = () => {
 	const form = useSelector((states: RootState) => states.authForm);
 	const [active, setActive] = useState(false);
 	const dispatch = useDispatch();
-	const [signInWithGoogle] = useSignInWithGoogle(auth);
-	const [signInWithGithub] = useSignInWithGithub(auth);
 
 	const toggleForm = () => {
 		dispatch(Toggle_Auth_Form());
@@ -36,14 +33,6 @@ const Authentication = () => {
 		},
 	};
 
-	const GoogleLogin = () => {
-		signInWithGoogle().then(toggleForm);
-	};
-
-	const GithubLogin = () => {
-		signInWithGithub().then(toggleForm);
-	};
-
 	useEffect(() => {
 		if (form) {
 			setActive(true);
@@ -57,12 +46,7 @@ const Authentication = () => {
 	}, [form]);
 
 	if (user) {
-		return (
-			<>
-				{user.displayName}
-				<div onClick={() => signOut(auth)}>signout</div>
-			</>
-		);
+		return <></>;
 	}
 	return active ? (
 		<div
