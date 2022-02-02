@@ -203,7 +203,17 @@ const Navbar = () => {
 						<NavLink href="/" label="Your Properties" purple />
 					</div>
 					{user ? (
-						<div className={styles.profile}>
+						<button className={styles.profile}>
+							<div className={styles.actions}>
+								<div>
+									<div>Setting</div>
+									<div className={styles.line}></div>
+								</div>
+								<div className={styles.red}>
+									<div onClick={logout}>Logout</div>
+									<div className={styles.line}></div>
+								</div>
+							</div>
 							<div className={styles.pic}>
 								<img
 									src={user.photoURL ? user.photoURL : ""}
@@ -217,7 +227,7 @@ const Navbar = () => {
 							<div>
 								<img src={Gear.src} />
 							</div>
-						</div>
+						</button>
 					) : (
 						<div
 							className={[styles.navLink, styles.purple].join(

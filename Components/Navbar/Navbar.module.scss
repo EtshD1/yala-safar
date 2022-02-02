@@ -227,6 +227,70 @@
 		display: flex;
 		gap: 0.75rem;
 		justify-content: space-between;
+		background: none;
+		padding: 0;
+		border: none;
+		font-family: Cairo;
+		font-size: 1.25rem;
+		position: relative;
+
+		&:focus {
+			.actions {
+				opacity: 1;
+				pointer-events: all;
+				transition: opacity 1000ms ease;
+			}
+		}
+
+		.actions {
+			position: absolute;
+			bottom: 4rem;
+			right: 0;
+			flex-direction: column;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 500ms ease;
+
+			div {
+				font-size: 1.5rem;
+				padding: 0.25rem 1.5rem;
+				margin-bottom: 0.5rem;
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+
+				&.red {
+					color: #f00;
+
+					.line {
+						background-color: #f00;
+					}
+				}
+
+				div,
+				.line {
+					padding: 0;
+					margin: 0;
+				}
+
+				.line {
+					padding: 0;
+					height: 2px;
+					background-color: #000;
+					width: 0;
+					position: relative;
+					top: -0.4rem;
+					transition: width 1s ease 0.2s;
+				}
+
+				&:hover {
+					.line {
+						transition: width 0.5s ease;
+						width: 100%;
+					}
+				}
+			}
+		}
 
 		div {
 			display: flex;
@@ -252,6 +316,7 @@
 			border-radius: 100%;
 			overflow: hidden;
 			display: flex;
+			align-self: center;
 
 			img {
 				width: 100%;
