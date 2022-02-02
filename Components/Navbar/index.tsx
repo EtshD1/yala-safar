@@ -1,13 +1,12 @@
 // import Image from "next/image";
 import Link from "next/link";
-import { getAuth } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./Navbar.module.scss";
 import BackIcon from "../../assets/icons/BackButton.svg";
 import Gear from "../../assets/icons/Gear.svg";
-import userImg from "../../assets/Images/user.jpg";
 import { Toggle_Auth_Form } from "../../redux/actions/forms";
 
 const NavLink = ({
@@ -62,6 +61,10 @@ const Navbar = () => {
 
 	const toggleForm = () => {
 		dispatch(Toggle_Auth_Form());
+	};
+
+	const logout = () => {
+		signOut(getAuth());
 	};
 
 	return (
@@ -125,18 +128,45 @@ const Navbar = () => {
 									label="Your Properties"
 									purple
 								/>
-								<div className={styles.pic}>
-									<div>
-										<img
-											src={
-												user.photoURL
-													? user.photoURL
-													: ""
-											}
-											alt="User Image"
-										/>
+								<button className={styles.profile}>
+									<div className={styles.pic}>
+										<div>
+											<img
+												src={
+													user.photoURL
+														? user.photoURL
+														: ""
+												}
+												alt="User Image"
+											/>
+										</div>
 									</div>
-								</div>
+									<div className={styles.profileMenu}>
+										<div>
+											<div>
+												<div>
+													<div>Settings</div>
+													<div
+														className={
+															styles.underline
+														}
+													></div>
+												</div>
+												<div
+													className={styles.red}
+													onClick={logout}
+												>
+													<div>Logout</div>
+													<div
+														className={
+															styles.underline
+														}
+													></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</button>
 							</>
 						) : loading ? (
 							<div className={styles.userLoading}>
