@@ -60,10 +60,12 @@ const Navbar = () => {
 	};
 
 	const toggleForm = () => {
+		ToggleMenu();
 		dispatch(Toggle_Auth_Form());
 	};
 
 	const logout = () => {
+		ToggleMenu();
 		signOut(getAuth());
 	};
 
