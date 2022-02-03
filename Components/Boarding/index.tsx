@@ -1,0 +1,136 @@
+import styles from "./styles.module.scss";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useState } from "react";
+
+const Field = ({
+	value,
+	onChange,
+	label,
+	warning,
+	verify,
+}: {
+	value: string;
+	onChange: (s: string) => void;
+	label: string;
+	warning: string;
+	verify: (s: string) => void;
+}) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newValue = e.target.value;
+		onChange(newValue);
+		if (warning) {
+			verify(newValue);
+		}
+	};
+
+	return (
+		<div>
+			<label>
+				<div>{label}</div>
+				<div className={styles.warning}>{warning}</div>
+				<input
+					type="text"
+					value={value}
+					onChange={handleChange}
+					onBlur={() => verify(value)}
+				/>
+			</label>
+		</div>
+	);
+};
+
+const Boarding = () => {
+	const auth = getAuth();
+	const [user] = useAuthState(auth);
+
+	// First Name
+	const [fName, setFName] = useState("");
+	const [fNameWarning, setFNameWarning] = useState("");
+	const checkOnFName = (s: string) => {
+		if (s.length === 0) {
+			setFNameWarning("Please enter your first Name");
+		} else {
+			setFNameWarning("");
+		}
+	};
+	// Last Name
+	const [lName, setLName] = useState("");
+	const [lNameWarning, setLNameWarning] = useState("");
+	const checkOnLName = (s: string) => {
+		if (s.length === 0) {
+			setLNameWarning("Please enter your first Name");
+		} else {
+			setLNameWarning("");
+		}
+	};
+	// Phone Number
+	const [phone, setPhone] = useState("");
+	const [phoneWarning, setPhoneWarning] = useState("");
+	const checkOnPhone = (s: string) => {
+		const reg = /01[0-9]{9}/;
+		if (reg.test(s)) {
+			setPhoneWarning("");
+		} else {
+			setPhoneWarning("Please enter a valid Phone Number");
+		}
+	};
+
+	const [email, setEmail] = useState("");
+	const [emailWarning, setEmailWarning] = useState("");
+	const checkOnEmail = (s: string) => {
+		const reg = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+		if (reg.test(s)) {
+			setEmailWarning("");
+		} else {
+			setEmailWarning("Please enter a valid Email Address");
+		}
+	};
+
+	return (
+		<div className={styles.container}>
+			<div className={styles.content}>
+				<h1>Welcome to Yala Safar</h1>
+				<p>Please fill out this form so you can continue</p>
+				<form>
+					<div className={styles.name}>
+						<Field
+							label="First Name"
+							value={fName}
+							onChange={setFName}
+							warning={fNameWarning}
+							verify={checkOnFName}
+						/>
+						<Field
+							label="Last Name"
+							value={lName}
+							onChange={setLName}
+							warning={lNameWarning}
+							verify={checkOnLName}
+						/>
+					</div>
+					<Field
+						label="Phone Number"
+						value={phone}
+						onChange={setPhone}
+						warning={phoneWarning}
+						verify={checkOnPhone}
+					/>
+					<Field
+						label="Email Address"
+						value={email}
+						onChange={setEmail}
+						warning={emailWarning}
+						verify={checkOnEmail}
+					/>
+					<div className={styles.actions}>
+						<div>Sign Out</div>
+						<button>Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	);
+};
+
+export default Boarding;

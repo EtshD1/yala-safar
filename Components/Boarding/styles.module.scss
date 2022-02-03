@@ -1,0 +1,83 @@
+@import "../../styles/_config";
+
+.container {
+	font-family: Cairo;
+	position: fixed;
+	z-index: 6;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(70, 15, 122, 0.356);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+
+	.content {
+		@include container;
+		background-color: #fff;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+		border-radius: 0.5rem;
+
+		.warning {
+			height: 1rem;
+			color: red;
+			text-align: end;
+			font-size: 0.85rem;
+		}
+
+		.actions {
+			display: flex;
+			justify-content: flex-end;
+			gap: 1rem;
+
+			& > div,
+			& > button {
+				padding: 0.5rem 1rem;
+				font-family: Cairo;
+				line-height: 1;
+				font-size: 1rem;
+				font-weight: bold;
+				border: 2px solid;
+				border-radius: 0.5rem;
+			}
+
+			button {
+				background-color: $primary-color;
+				border-color: #9e86da;
+				color: #fff;
+			}
+
+			div {
+				opacity: 0.6;
+			}
+		}
+
+		h1 {
+			font-size: 1.5rem;
+			font-weight: bold;
+		}
+
+		p {
+			opacity: 0.6;
+			margin: 0.5rem 0;
+		}
+
+		input {
+			font-size: 0.9rem;
+			font-family: Cairo;
+			border: none;
+			border-bottom: 2px solid #000;
+			outline: none;
+			display: block;
+			width: 100%;
+		}
+
+		form > div,
+		.name > div {
+			margin-bottom: 0.5rem;
+		}
+	}
+}

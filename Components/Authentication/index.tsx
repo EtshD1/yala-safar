@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
 import { Toggle_Auth_Form } from "../../redux/actions/forms";
 import { useEffect, useState } from "react";
+import Boarding from "../Boarding";
 
 const Authentication = () => {
 	const db = getFirestore();
@@ -62,12 +63,14 @@ const Authentication = () => {
 
 				if (!info.onBoard) {
 					setBoarding(true);
+				} else {
+					setBoarding(false);
 				}
 			});
 		});
 
 		if (boarding) {
-			// Router.push("/boarding");
+			return <Boarding />;
 		}
 
 		return <></>;
