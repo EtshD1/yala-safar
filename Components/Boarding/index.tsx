@@ -1,7 +1,7 @@
 import styles from "./styles.module.scss";
-import { getAuth } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Field = ({
 	value,
@@ -75,7 +75,7 @@ const Boarding = () => {
 			setPhoneWarning("Please enter a valid Phone Number");
 		}
 	};
-
+	// Email
 	const [email, setEmail] = useState("");
 	const [emailWarning, setEmailWarning] = useState("");
 	const checkOnEmail = (s: string) => {
@@ -85,6 +85,29 @@ const Boarding = () => {
 		} else {
 			setEmailWarning("Please enter a valid Email Address");
 		}
+	};
+
+	useEffect(() => {
+		if (user) {
+			if (user.email) {
+				setEmail(user.email);
+			}
+			if (user.phoneNumber) {
+				setPhone(user.phoneNumber);
+			}
+			if (user.displayName) {
+				const names = user.displayName.split(" ");
+				const first = names[0];
+				setFName(first);
+				if (names.length > 1) {
+					setLName(names[names.length - 1]);
+				}
+			}
+		}
+	}, [user]);
+
+	const logout = () => {
+		signOut(auth);
 	};
 
 	return (
@@ -124,7 +147,7 @@ const Boarding = () => {
 						verify={checkOnEmail}
 					/>
 					<div className={styles.actions}>
-						<div>Sign Out</div>
+						<div onClick={logout}>Sign Out</div>
 						<button>Submit</button>
 					</div>
 				</form>
