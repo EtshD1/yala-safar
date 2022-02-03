@@ -13,6 +13,7 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
+	animation: show 0.5s ease forwards;
 
 	.content {
 		@include container;
@@ -20,6 +21,8 @@
 		padding-top: 1rem;
 		padding-bottom: 1rem;
 		border-radius: 0.5rem;
+		border: 2px solid hsla(0, 0%, 0%, 0.1);
+		box-shadow: 0 0 5px #000;
 
 		.warning {
 			height: 1rem;
@@ -79,5 +82,15 @@
 		.name > div {
 			margin-bottom: 0.5rem;
 		}
+	}
+}
+
+@keyframes show {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
 	}
 }
