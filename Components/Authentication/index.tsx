@@ -6,7 +6,6 @@ import {
 	where,
 	getDocs,
 } from "firebase/firestore";
-import Router from "next/router";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { getAuth, ProviderId } from "firebase/auth";
 import styles from "./styles.module.scss";
@@ -68,7 +67,7 @@ const Authentication = () => {
 		});
 
 		if (boarding) {
-			Router.push("/boarding");
+			// Router.push("/boarding");
 		}
 
 		return <></>;
