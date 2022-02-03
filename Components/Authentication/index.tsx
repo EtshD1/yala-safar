@@ -1,8 +1,12 @@
+import { useAuthState } from "react-firebase-hooks/auth";
 import {
-	useAuthState,
-	useSignInWithGoogle,
-	useSignInWithGithub,
-} from "react-firebase-hooks/auth";
+	getFirestore,
+	collection,
+	query,
+	where,
+	getDocs,
+} from "firebase/firestore";
+import Router from "next/router";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { getAuth, ProviderId } from "firebase/auth";
 import styles from "./styles.module.scss";
@@ -12,8 +16,10 @@ import { Toggle_Auth_Form } from "../../redux/actions/forms";
 import { useEffect, useState } from "react";
 
 const Authentication = () => {
+	const db = getFirestore();
 	const auth = getAuth();
 	const [user] = useAuthState(auth);
+	const [boarding, setBoarding] = useState(false);
 	const form = useSelector((states: RootState) => states.authForm);
 	const [active, setActive] = useState(false);
 	const dispatch = useDispatch();
@@ -46,6 +52,25 @@ const Authentication = () => {
 	}, [form]);
 
 	if (user) {
+		const q = query(collection(db, "users"), where("uid", "==", user.uid));
+		const querySnapshot = getDocs(q);
+		querySnapshot.then((data) => {
+			if (data.size) {
+				setBoarding(true);
+			}
+			data.forEach((doc) => {
+				const info = doc.data();
+
+				if (!info.onBoard) {
+					setBoarding(true);
+				}
+			});
+		});
+
+		if (boarding) {
+			Router.push("/boarding");
+		}
+
 		return <></>;
 	}
 	return active ? (

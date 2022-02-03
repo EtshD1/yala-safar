@@ -9,9 +9,9 @@ import "../styles/reset.css";
 import Authentication from "../Components/Authentication";
 
 const store = createStore(states);
+initializeApp(firebaseConfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
-	initializeApp(firebaseConfig);
 	return (
 		<Provider store={store}>
 			<div id="App">
