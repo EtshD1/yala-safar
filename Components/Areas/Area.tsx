@@ -22,7 +22,7 @@ const Area = ({
 					<img className={styles.Img} src={image.src} />
 				</div>
 				<div className={styles.info}>
-					<div className={styles.name}>{name}</div>
+					<div className={styles.location}>{name}</div>
 					<div>526 Properties</div>
 				</div>
 			</div>

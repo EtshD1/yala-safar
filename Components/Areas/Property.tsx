@@ -5,12 +5,14 @@ import styles from "./styles.module.scss";
 import Link from "next/link";
 
 const Property = ({
+	name,
 	image,
 	location,
 	price,
 	rating,
 	view = false,
 }: {
+	name?: string;
 	location: string;
 	rating: number;
 	price: number;
@@ -35,7 +37,7 @@ const Property = ({
 					<img className={styles.Img} src={image.src} />
 				</div>
 				<div className={styles.info}>
-					<div className={styles.name}>{location}</div>
+					<div className={styles.location}>{location}</div>
 					<div className={styles.rating}>{stars}</div>
 					<div className={styles.price}>{price}£/night</div>
 				</div>
