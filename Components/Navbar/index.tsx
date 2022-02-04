@@ -8,6 +8,7 @@ import styles from "./Navbar.module.scss";
 import BackIcon from "../../assets/icons/BackButton.svg";
 import Gear from "../../assets/icons/Gear.svg";
 import { Toggle_Auth_Form } from "../../redux/actions/forms";
+import { getFirestore, getDoc, doc } from "firebase/firestore";
 
 const NavLink = ({
 	label,
@@ -40,8 +41,14 @@ const NavLink = ({
 const Navbar = () => {
 	const [menu, setMenu] = useState(false);
 	const [shown, setShown] = useState(false);
+	const db = getFirestore();
 	const [user, loading, error] = useAuthState(getAuth());
 	const dispatch = useDispatch();
+
+	const [profile, setProfile] = useState({
+		name: "",
+		email: "",
+	});
 
 	useEffect(() => {
 		if (menu) {
@@ -53,7 +60,23 @@ const Navbar = () => {
 
 			return () => clearTimeout(to);
 		}
-	});
+	}, [menu, setShown]);
+
+	useEffect(() => {
+		if (user) {
+			getDoc(doc(db, "users", user.uid)).then((doc) => {
+				if (doc.exists()) {
+					const data = doc.data();
+					if (data.onBoard) {
+						setProfile({
+							name: `${data.fName} ${data.lName}`,
+							email: data.email,
+						});
+					}
+				}
+			});
+		}
+	}, [user, setProfile]);
 
 	const ToggleMenu = () => {
 		setMenu((ps) => !ps);
@@ -233,8 +256,10 @@ const Navbar = () => {
 								/>
 							</div>
 							<div className={styles.info}>
-								<div>{user.displayName}</div>
-								<div className={styles.email}>{user.email}</div>
+								<div>{profile.name}</div>
+								<div className={styles.email}>
+									{profile.email}
+								</div>
 							</div>
 							<div>
 								<img src={Gear.src} />
