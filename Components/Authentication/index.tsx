@@ -1,11 +1,5 @@
 import { useAuthState } from "react-firebase-hooks/auth";
-import {
-	getFirestore,
-	collection,
-	query,
-	where,
-	getDocs,
-} from "firebase/firestore";
+import { getFirestore, getDoc, doc } from "firebase/firestore";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { getAuth, ProviderId } from "firebase/auth";
 import styles from "./styles.module.scss";
@@ -52,27 +46,21 @@ const Authentication = () => {
 	}, [form]);
 
 	if (user) {
-		const q = query(collection(db, "users"), where("uid", "==", user.uid));
-		const querySnapshot = getDocs(q);
-		querySnapshot.then((data) => {
-			if (data.size) {
-				setBoarding(true);
-			}
-			data.forEach((doc) => {
-				const info = doc.data();
-
-				if (!info.onBoard) {
+		getDoc(doc(db, "users", user.uid)).then((doc) => {
+			if (doc.exists()) {
+				const data = doc.data();
+				if (!data.onBoard) {
 					setBoarding(true);
 				} else {
 					setBoarding(false);
 				}
-			});
+			} else {
+				setBoarding(true);
+			}
 		});
-
 		if (boarding) {
 			return <Boarding />;
 		}
-
 		return <></>;
 	}
 	return active ? (

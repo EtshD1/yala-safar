@@ -2,6 +2,8 @@ import styles from "./styles.module.scss";
 import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
+import { doc, setDoc } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 const Field = ({
 	value,
@@ -43,7 +45,7 @@ const Field = ({
 const Boarding = () => {
 	const auth = getAuth();
 	const [user] = useAuthState(auth);
-
+	const db = getFirestore();
 	// First Name
 	const [fName, setFName] = useState("");
 	const [fNameWarning, setFNameWarning] = useState("");
@@ -110,12 +112,43 @@ const Boarding = () => {
 		signOut(auth);
 	};
 
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		checkOnEmail(email);
+		checkOnFName(fName);
+		checkOnLName(lName);
+		checkOnPhone(phone);
+		if (emailWarning) {
+			return;
+		}
+		if (fNameWarning) {
+			return;
+		}
+		if (lNameWarning) {
+			return;
+		}
+		if (phoneWarning) {
+			return;
+		}
+		setDoc(
+			doc(db, "users", user!.uid),
+			{
+				fName,
+				lName,
+				phone,
+				email,
+				onBoard: true,
+			},
+			{ merge: true }
+		);
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.content}>
 				<h1>Welcome to Yala Safar</h1>
 				<p>Please fill out this form so you can continue</p>
-				<form>
+				<form onSubmit={handleSubmit}>
 					<div className={styles.name}>
 						<Field
 							label="First Name"

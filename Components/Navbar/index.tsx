@@ -200,9 +200,19 @@ const Navbar = () => {
 							<img src={BackIcon.src} />
 						</div>
 						<NavLink href="/" label="Home" />
-						<NavLink href="/" label="Reservations" />
-						<NavLink href="/" label="Messages" />
-						<NavLink href="/" label="Your Properties" purple />
+						{user ? (
+							<>
+								<NavLink href="/" label="Reservations" />
+								<NavLink href="/" label="Messages" />
+								<NavLink
+									href="/"
+									label="Your Properties"
+									purple
+								/>
+							</>
+						) : (
+							""
+						)}
 					</div>
 					{user ? (
 						<button className={styles.profile}>
