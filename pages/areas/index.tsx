@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Area from "../../Components/Areas/Area";
-import Navbar from "../../Components/Navbar";
 import VerticalScroll from "../../Components/VerticalScroll";
 import cairo from "../../assets/Images/cairo.jpg";
 import giza from "../../assets/Images/pyramids.jpg";
@@ -15,7 +14,6 @@ const Areas = () => {
 			<Head>
 				<title>Yala Safar - Areas</title>
 			</Head>
-			<Navbar />
 			<div className={styles.container}>
 				<div>
 					<h1>Explore Egypt</h1>

@@ -1,4 +1,3 @@
-import Navbar from "../../Components/Navbar";
 import styles from "../../styles/Property.module.scss";
 // import Image from "next/image";
 import chalet1 from "../../assets/Images/chalet1.jpg";
@@ -9,7 +8,6 @@ import Location from "../../assets/icons/Location.svg";
 const Property = () => {
 	return (
 		<div>
-			<Navbar />
 			<div className={styles.container}>
 				<div className={styles.preview}>
 					<div className={styles.bg}>

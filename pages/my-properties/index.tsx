@@ -1,5 +1,4 @@
 import Property from "../../Components/Areas/Property";
-import Navbar from "../../Components/Navbar";
 import styles from "../../styles/MyProps.module.scss";
 import Link from "next/link";
 import chalet1 from "../../assets/Images/chalet1.jpg";
@@ -7,7 +6,6 @@ import chalet1 from "../../assets/Images/chalet1.jpg";
 const MyProperties = () => {
 	return (
 		<div>
-			<Navbar />
 			<div className={styles.container}>
 				<div className={styles.heading}>
 					<h1>Your Properties</h1>
