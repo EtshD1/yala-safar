@@ -149,7 +149,7 @@ const Navbar = () => {
 								<NavLink href="/" white label="Reservations" />
 								<NavLink href="/" white label="Messages" />
 								<NavLink
-									href="/"
+									href="/my-properties"
 									label="Your Properties"
 									purple
 								/>
@@ -228,7 +228,7 @@ const Navbar = () => {
 								<NavLink href="/" label="Reservations" />
 								<NavLink href="/" label="Messages" />
 								<NavLink
-									href="/"
+									href="/my-properties"
 									label="Your Properties"
 									purple
 								/>
