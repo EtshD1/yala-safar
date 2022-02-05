@@ -9,6 +9,7 @@ import BackIcon from "../../assets/icons/BackButton.svg";
 import Gear from "../../assets/icons/Gear.svg";
 import { Toggle_Auth_Form } from "../../redux/actions/forms";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
+import Loader from "../Loader";
 
 const NavLink = ({
 	label,
@@ -194,11 +195,7 @@ const Navbar = () => {
 								</button>
 							</>
 						) : loading ? (
-							<div className={styles.userLoading}>
-								<div></div>
-								<div></div>
-								<div></div>
-							</div>
+							<Loader />
 						) : (
 							<>
 								<div

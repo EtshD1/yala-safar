@@ -7,6 +7,7 @@ import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getFirestore, addDoc, collection } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
+import Loader from "../../Components/Loader";
 
 const Field = ({
 	label,
@@ -65,7 +66,7 @@ const Add = () => {
 	const db = getFirestore();
 	const [name, setName] = useState("");
 	const [location, setLocation] = useState("");
-	const [city, setCity] = useState("");
+	const [city, setCity] = useState<string>("Cairo");
 	const [price, setPrice] = useState(0);
 	const router = useRouter();
 	const [warning, setWarnings] = useState({
@@ -128,9 +129,9 @@ const Add = () => {
 				price,
 				...includes,
 				owner: user!.uid,
+				rating: [],
 			});
 
-			const imgName = img!.name.split(".");
 			const storageRef = ref(storage, `${docRef.id}`);
 			const file = await img!.arrayBuffer();
 			uploadBytes(storageRef, file).then((snapshot) => {
@@ -140,7 +141,14 @@ const Add = () => {
 	};
 
 	if (waiting) {
-		return <div className={styles.waiting}>Please Wait</div>;
+		return (
+			<div className={styles.waiting}>
+				<div>
+					<Loader />
+					<div>Please Wait</div>
+				</div>
+			</div>
+		);
 	}
 
 	return (
@@ -191,12 +199,27 @@ const Add = () => {
 						onChange={setLocation}
 						warning={warning.location}
 					/>
-					<Field
-						label="City"
-						value={city}
-						onChange={setCity}
-						warning={warning.city}
-					/>
+					<div className={styles.field}>
+						<label>
+							<div>City</div>
+							<div className={styles.warning}>{warning.city}</div>
+							<select
+								value={city}
+								onChange={(e) => setCity(e.target.value)}
+							>
+								<option value="Cairo">Cairo</option>
+								<option value="Alexandira">Alexandira</option>
+								<option value="Luxor">Luxor</option>
+								<option value="Giza">Giza</option>
+								<option value="Hurghada">Hurghada</option>
+								<option value="North Coast">North Coast</option>
+								<option value="Sharm El-Sheikh">
+									Sharm El-Sheikh
+								</option>
+								<option value="Port Said">Port Said</option>
+							</select>
+						</label>
+					</div>
 					<div className={styles.field}>
 						<label>
 							<div>Price per night</div>
