@@ -41,11 +41,19 @@
 }
 
 @media (min-width: 50rem) {
-	.container .heading {
-		flex-direction: row;
+	.container {
+		.properties {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
 
-		.addProp {
-			margin: 0;
+		.heading {
+			flex-direction: row;
+
+			.addProp {
+				margin: 0;
+			}
 		}
 	}
 }

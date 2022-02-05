@@ -1,7 +1,8 @@
-import Property from "../Components/Areas/Property";
-import Navbar from "../Components/Navbar";
-import styles from "../styles/MyProps.module.scss";
-import chalet1 from "../assets/Images/chalet1.jpg";
+import Property from "../../Components/Areas/Property";
+import Navbar from "../../Components/Navbar";
+import styles from "../../styles/MyProps.module.scss";
+import Link from "next/link";
+import chalet1 from "../../assets/Images/chalet1.jpg";
 
 const MyProperties = () => {
 	return (
@@ -10,7 +11,9 @@ const MyProperties = () => {
 			<div className={styles.container}>
 				<div className={styles.heading}>
 					<h1>Your Properties</h1>
-					<div className={styles.addProp}>Add Property</div>
+					<Link href="/my-properties/add">
+						<div className={styles.addProp}>Add Property</div>
+					</Link>
 				</div>
 				<div className={styles.properties}>
 					<Property
