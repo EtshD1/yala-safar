@@ -148,7 +148,6 @@ const Navbar = () => {
 						{user ? (
 							<>
 								<NavLink href="/" white label="Reservations" />
-								<NavLink href="/" white label="Messages" />
 								<NavLink
 									href="/my-properties"
 									label="Your Properties"
@@ -223,7 +222,6 @@ const Navbar = () => {
 						{user ? (
 							<>
 								<NavLink href="/" label="Reservations" />
-								<NavLink href="/" label="Messages" />
 								<NavLink
 									href="/my-properties"
 									label="Your Properties"

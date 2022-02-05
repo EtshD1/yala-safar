@@ -241,12 +241,21 @@ const Property = () => {
 					</div>
 					<div className={styles.cta}>
 						{user ? (
-							<div
-								className={styles.delete}
-								onClick={deleteProperty}
-							>
-								Delete Property
-							</div>
+							user.uid === details.owner ? (
+								<>
+									<div
+										className={styles.delete}
+										onClick={deleteProperty}
+									>
+										Delete Property
+									</div>
+								</>
+							) : (
+								<>
+									<div>Contact Owner</div>
+									<div className={styles.book}>Book Now</div>
+								</>
+							)
 						) : (
 							<>
 								<div>Contact Owner</div>

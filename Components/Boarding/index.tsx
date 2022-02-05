@@ -45,6 +45,7 @@ const Boarding = () => {
 	const auth = getAuth();
 	const [user] = useAuthState(auth);
 	const db = getFirestore();
+	const [done, setDone] = useState(false);
 	// First Name
 	const [fName, setFName] = useState("");
 	const [fNameWarning, setFNameWarning] = useState("");
@@ -139,9 +140,13 @@ const Boarding = () => {
 				onBoard: true,
 			},
 			{ merge: true }
-		);
+		).then(() => {
+			setDone(true);
+		});
 	};
-
+	if (done) {
+		return <></>;
+	}
 	return (
 		<div className={styles.container}>
 			<div className={styles.content}>
