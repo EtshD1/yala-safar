@@ -5,20 +5,33 @@ import Back from "../../assets/icons/Back.svg";
 import Star from "../../assets/icons/Star.svg";
 import Location from "../../assets/icons/Location.svg";
 import { useRouter } from "next/router";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import {
+	getStorage,
+	ref,
+	getDownloadURL,
+	deleteObject,
+} from "firebase/storage";
 import { useEffect, useState } from "react";
 import { getApp } from "firebase/app";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, getFirestore } from "firebase/firestore";
 import Loader from "../../Components/Loader";
 import Link from "next/link";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useDispatch } from "react-redux";
+import { Toggle_Auth_Form } from "../../redux/actions/forms";
 
 const Property = () => {
 	const { query } = useRouter();
 	const firebaseApp = getApp();
+	const auth = getAuth();
+	const [user] = useAuthState(auth);
 	const db = getFirestore();
 	const storage = getStorage(firebaseApp);
+	const router = useRouter();
 	const [img, setImage] = useState("");
 	const [loading, setLoading] = useState(true);
+	const [found, setFound] = useState(true);
 	const [details, setDetails] = useState({
 		name: "",
 		rating: 0,
@@ -36,14 +49,10 @@ const Property = () => {
 			transportation: false,
 		},
 	});
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (query.propertyid) {
-			getDownloadURL(ref(storage, query.propertyid.toString())).then(
-				(url) => {
-					setImage(url);
-				}
-			);
 			getDoc(doc(db, "properties", query.propertyid.toString())).then(
 				(doc) => {
 					if (doc.exists()) {
@@ -69,7 +78,15 @@ const Property = () => {
 								wifi: data.wifi,
 							},
 						});
+						getDownloadURL(
+							ref(storage, query.propertyid!.toString())
+						).then((url) => {
+							setImage(url);
+							setLoading(false);
+						});
+					} else {
 						setLoading(false);
+						setFound(false);
 					}
 				}
 			);
@@ -86,6 +103,41 @@ const Property = () => {
 			</div>
 		);
 	}
+
+	if (!found) {
+		return (
+			<div className={styles.waiting}>
+				<div>
+					<div>404</div>
+					<div>Property not found</div>
+				</div>
+			</div>
+		);
+	}
+
+	const deleteProperty = () => {
+		const desertRef = ref(storage, "images/desert.jpg");
+		setLoading(true);
+		deleteObject(desertRef)
+			.then(() => {
+				console.log("Image Deleted");
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+		deleteDoc(doc(db, "properties", query.propertyid!.toString())).then(
+			() => {
+				router.push("/");
+			}
+		);
+	};
+
+	const book = () => {
+		if (user) {
+		} else {
+			dispatch(Toggle_Auth_Form());
+		}
+	};
 
 	return (
 		<div>
@@ -188,8 +240,19 @@ const Property = () => {
 						</div>
 					</div>
 					<div className={styles.cta}>
-						<div>Contact Owner</div>
-						<div className={styles.book}>Book Now</div>
+						{user ? (
+							<div
+								className={styles.delete}
+								onClick={deleteProperty}
+							>
+								Delete Property
+							</div>
+						) : (
+							<>
+								<div>Contact Owner</div>
+								<div className={styles.book}>Book Now</div>
+							</>
+						)}
 					</div>
 				</div>
 			</div>

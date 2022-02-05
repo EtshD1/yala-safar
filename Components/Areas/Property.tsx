@@ -48,7 +48,7 @@ const Property = ({ id, view = false }: { id: string; view?: boolean }) => {
 		stars.push(<img key={i} src={HollowStar.src} />);
 	}
 	return (
-		<Link href="/properties/some-property">
+		<Link href={`/properties/${id}`}>
 			<div className={styles.property}>
 				<div
 					className={[styles.image, view ? styles.unset : ""].join(

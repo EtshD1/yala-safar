@@ -54,63 +54,6 @@ const MyProperties = () => {
 							<Property id={i} key={i} />
 						))}
 					</div>
-
-					{/* <div className={styles.properties}>
-						<Property
-							image={chalet1}
-							price={199}
-							location="Cairo"
-							rating={5}
-						/>
-						<Property
-							image={chalet1}
-							price={199}
-							location="Cairo"
-							rating={5}
-						/>
-						<Property
-							image={chalet1}
-							price={199}
-							location="Cairo"
-							rating={5}
-						/>
-						<Property
-							image={chalet1}
-							price={199}
-							location="Cairo"
-							rating={5}
-						/>
-						<Property
-							image={chalet1}
-							price={199}
-							location="Cairo"
-							rating={5}
-						/>
-						<Property
-							image={chalet1}
-							price={199}
-							location="Cairo"
-							rating={5}
-						/>
-						<Property
-							image={chalet1}
-							price={199}
-							location="Cairo"
-							rating={5}
-						/>
-						<Property
-							image={chalet1}
-							price={199}
-							location="Cairo"
-							rating={5}
-						/>
-						<Property
-							image={chalet1}
-							price={199}
-							location="Cairo"
-							rating={5}
-						/>
-					</div> */}
 				</div>
 			</div>
 		);
