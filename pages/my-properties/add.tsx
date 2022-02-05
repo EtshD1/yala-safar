@@ -208,7 +208,7 @@ const Add = () => {
 								onChange={(e) => setCity(e.target.value)}
 							>
 								<option value="Cairo">Cairo</option>
-								<option value="Alexandira">Alexandira</option>
+								<option value="Alexandria">Alexandria</option>
 								<option value="Luxor">Luxor</option>
 								<option value="Giza">Giza</option>
 								<option value="Hurghada">Hurghada</option>

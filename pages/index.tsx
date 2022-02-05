@@ -4,7 +4,9 @@ import styles from "../styles/Homepage.module.scss";
 import Icon from "../assets/icons/Search.svg";
 // import Image from "next/image";
 import CairoJpg from "../assets/Images/cairo.jpg";
+import Alex from "../assets/Images/alexandria.jpg";
 import NorthCoast from "../assets/Images/northcoast.jpg";
+import Giza from "../assets/Images/pyramids.jpg";
 import Chalet from "../assets/Images/chalet1.jpg";
 import VerticalScroll from "../Components/VerticalScroll";
 import Property from "../Components/Areas/Property";
@@ -16,12 +18,15 @@ import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 const Home: NextPage = () => {
 	const db = getFirestore();
 	const [ids, setIds] = useState<Array<string>>([]);
+	const [locations, setLocations] = useState<Array<string>>([]);
 
 	useEffect(() => {
 		const q = query(collection(db, "properties"));
 		getDocs(q).then((docs) => {
+			setLocations([]);
 			docs.forEach((d) => {
 				const id = d.id;
+				const loc = d.data().city;
 				setIds((ps) => {
 					if (ps.includes(id)) {
 						return ps;
@@ -29,9 +34,13 @@ const Home: NextPage = () => {
 						return [...ps, id];
 					}
 				});
+				setLocations((ps) => {
+					return [...ps, loc];
+				});
 			});
 		});
 	}, [db]);
+
 	return (
 		<div>
 			<Head>
@@ -67,10 +76,30 @@ const Home: NextPage = () => {
 					</div>
 				</div>
 				<VerticalScroll>
-					<Area image={NorthCoast} name="North Coast" />
-					<Area image={CairoJpg} name="Cairo" />
-					<Area image={CairoJpg} name="Cairo" />
-					<Area image={CairoJpg} name="Cairo" />
+					<Area
+						image={NorthCoast}
+						name="North Coast"
+						count={
+							locations.filter((v) => v === "North Coast").length
+						}
+					/>
+					<Area
+						image={CairoJpg}
+						name="Cairo"
+						count={locations.filter((v) => v === "Cairo").length}
+					/>
+					<Area
+						image={Alex}
+						name="Alexandria"
+						count={
+							locations.filter((v) => v === "Alexandria").length
+						}
+					/>
+					<Area
+						image={Giza}
+						name="Giza"
+						count={locations.filter((v) => v === "Giza").length}
+					/>
 				</VerticalScroll>
 			</div>
 			<div className={styles.areas}>

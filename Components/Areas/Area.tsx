@@ -6,10 +6,12 @@ const Area = ({
 	image,
 	name,
 	view,
+	count,
 }: {
 	view?: boolean;
 	name: string;
 	image: StaticImageData;
+	count: number;
 }) => {
 	return (
 		<Link href="/properties">
@@ -23,7 +25,7 @@ const Area = ({
 				</div>
 				<div className={styles.info}>
 					<div className={styles.location}>{name}</div>
-					<div>526 Properties</div>
+					<div>{count} Properties</div>
 				</div>
 			</div>
 		</Link>
