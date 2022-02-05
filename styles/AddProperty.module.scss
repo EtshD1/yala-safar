@@ -78,13 +78,13 @@
 		}
 
 		.post button {
+			border: 2px solid rgba(255, 255, 255, 0.25);
 			margin-top: 1rem;
 			width: 100%;
 			padding: 0.5rem;
 			font-family: Cairo;
 			font-size: 1.1rem;
 			background: $primary-color;
-			border: none;
 			color: #fff;
 			border-radius: 0.5rem;
 			font-weight: bold;
