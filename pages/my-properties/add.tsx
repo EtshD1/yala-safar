@@ -85,7 +85,7 @@ const Add = () => {
 		ac: false,
 		transportation: false,
 	});
-	const [waiting, setWaring] = useState(false);
+	const [waiting, setWaiting] = useState(false);
 
 	if (!loading) {
 		if (!user) {
@@ -120,6 +120,7 @@ const Add = () => {
 			submit = false;
 		}
 		if (submit) {
+			setWaiting(true);
 			const docRef = await addDoc(collection(db, "properties"), {
 				name,
 				location,
@@ -130,20 +131,17 @@ const Add = () => {
 			});
 
 			const imgName = img!.name.split(".");
-			const storageRef = ref(
-				storage,
-				`${docRef.id}.${imgName[imgName.length - 1]}`
-			);
+			const storageRef = ref(storage, `${docRef.id}`);
 			const file = await img!.arrayBuffer();
 			uploadBytes(storageRef, file).then((snapshot) => {
-				console.log("Uploaded a blob or file!");
+				router.push(`/properties/${docRef.id}`);
 			});
 		}
 	};
 
-	// if (waiting) {
-
-	// }
+	if (waiting) {
+		return <div className={styles.waiting}>Please Wait</div>;
+	}
 
 	return (
 		<div className={styles.container}>
