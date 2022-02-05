@@ -113,9 +113,11 @@ const Property = () => {
 									<img src={Location.src} />
 								</div>
 								<div>
-									<div className={styles.heading}>
-										{details.location}
-									</div>
+									<a href={details.location} target="_blank">
+										<div className={styles.heading}>
+											Location
+										</div>
+									</a>
 								</div>
 							</div>
 							<div>
