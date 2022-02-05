@@ -1,22 +1,30 @@
 import { useState } from "react";
 import styles from "../../styles/AddProperty.module.scss";
 import AddImage from "../../assets/icons/AddImage.svg";
-import { getStorage } from "firebase/storage";
 import { getApp } from "firebase/app";
+import { useRouter } from "next/router";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { getFirestore, addDoc, collection } from "firebase/firestore";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 const Field = ({
 	label,
 	value,
 	onChange,
+	warning,
 }: {
 	label: string;
 	value: string;
 	onChange: (s: string) => void;
+	warning: string;
+	number?: boolean;
 }) => {
 	return (
 		<div className={styles.field}>
 			<label>
 				<div>{label}</div>
+				<div className={styles.warning}>{warning}</div>
 				<input
 					type="text"
 					value={value}
@@ -51,11 +59,22 @@ const Checkbox = ({
 const Add = () => {
 	const [img, setImg] = useState<File | null>();
 	const firebaseApp = getApp();
+	const auth = getAuth();
+	const [user, loading] = useAuthState(auth);
 	const storage = getStorage(firebaseApp);
+	const db = getFirestore();
 	const [name, setName] = useState("");
 	const [location, setLocation] = useState("");
 	const [city, setCity] = useState("");
-	const [price, setPrice] = useState("");
+	const [price, setPrice] = useState(0);
+	const router = useRouter();
+	const [warning, setWarnings] = useState({
+		name: "",
+		location: "",
+		city: "",
+		price: "",
+		img: "",
+	});
 	const [includes, setIncludes] = useState({
 		beachAccess: false,
 		wifi: false,
@@ -66,13 +85,73 @@ const Add = () => {
 		ac: false,
 		transportation: false,
 	});
+	const [waiting, setWaring] = useState(false);
+
+	if (!loading) {
+		if (!user) {
+			router.back();
+		}
+	}
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		let submit = true;
+		if (!name) {
+			setWarnings((ps) => ({ ...ps, name: "Please enter a name" }));
+			submit = false;
+		}
+		if (!img) {
+			setWarnings((ps) => ({ ...ps, img: "Please select an image" }));
+			submit = false;
+		}
+		if (!location) {
+			setWarnings((ps) => ({
+				...ps,
+				location: "Please enter a Location",
+			}));
+			submit = false;
+		}
+		if (!city) {
+			setWarnings((ps) => ({ ...ps, city: "Please select a City" }));
+			submit = false;
+		}
+		if (!price) {
+			setWarnings((ps) => ({ ...ps, price: "Please enter a Price" }));
+			submit = false;
+		}
+		if (submit) {
+			const docRef = await addDoc(collection(db, "properties"), {
+				name,
+				location,
+				city,
+				price,
+				...includes,
+				owner: user!.uid,
+			});
+
+			const imgName = img!.name.split(".");
+			const storageRef = ref(
+				storage,
+				`${docRef.id}.${imgName[imgName.length - 1]}`
+			);
+			const file = await img!.arrayBuffer();
+			uploadBytes(storageRef, file).then((snapshot) => {
+				console.log("Uploaded a blob or file!");
+			});
+		}
+	};
+
+	// if (waiting) {
+
+	// }
 
 	return (
 		<div className={styles.container}>
 			<h1>Property Posting</h1>
 			<div className={styles.form}>
-				<form onSubmit={(e) => e.preventDefault()}>
+				<form onSubmit={handleSubmit}>
 					<div className={styles.imgInput}>
+						<div className={styles.warning}>{warning.img}</div>
 						<label>
 							<input
 								type="file"
@@ -102,14 +181,40 @@ const Add = () => {
 							)}
 						</label>
 					</div>
-					<Field label="Name" value={name} onChange={setName} />
+					<Field
+						label="Name"
+						value={name}
+						onChange={setName}
+						warning={warning.name}
+					/>
 					<Field
 						label="Location"
 						value={location}
 						onChange={setLocation}
+						warning={warning.location}
 					/>
-					<Field label="City" value={city} onChange={setCity} />
-					<Field label="Price" value={price} onChange={setPrice} />
+					<Field
+						label="City"
+						value={city}
+						onChange={setCity}
+						warning={warning.city}
+					/>
+					<div className={styles.field}>
+						<label>
+							<div>Price per night</div>
+							<div className={styles.warning}>
+								{warning.price}
+							</div>
+							<input
+								type="number"
+								value={price}
+								onChange={(e) => {
+									setPrice(parseInt(e.target.value));
+								}}
+								min={0}
+							/>
+						</label>
+					</div>
 					<div className={styles.includes}>
 						<Checkbox
 							label="Beach Access"

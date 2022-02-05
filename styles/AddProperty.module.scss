@@ -4,6 +4,7 @@
 	padding-top: 3.75rem;
 	@include container;
 	width: 100%;
+	flex-grow: 1;
 
 	h1 {
 		font-size: 1.5rem;
@@ -70,6 +71,10 @@
 					border-radius: 0.75rem;
 				}
 			}
+		}
+		.warning {
+			color: red;
+			text-align: end;
 		}
 
 		.includes {
