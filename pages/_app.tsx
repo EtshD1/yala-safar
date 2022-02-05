@@ -10,9 +10,9 @@ import Authentication from "../Components/Authentication";
 import Navbar from "../Components/Navbar";
 
 const store = createStore(states);
-initializeApp(firebaseConfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
+	initializeApp(firebaseConfig);
 	return (
 		<Provider store={store}>
 			<div id="App">

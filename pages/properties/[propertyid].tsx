@@ -10,11 +10,12 @@ import { useEffect, useState } from "react";
 import { getApp } from "firebase/app";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import Loader from "../../Components/Loader";
+import Link from "next/link";
 
 const Property = () => {
-	const db = getFirestore();
 	const { query } = useRouter();
 	const firebaseApp = getApp();
+	const db = getFirestore();
 	const storage = getStorage(firebaseApp);
 	const [img, setImage] = useState("");
 	const [loading, setLoading] = useState(true);
@@ -79,8 +80,8 @@ const Property = () => {
 		return (
 			<div className={styles.waiting}>
 				<div>
-					<div>Please Wait</div>
 					<Loader />
+					<div>Please Wait</div>
 				</div>
 			</div>
 		);
@@ -95,9 +96,11 @@ const Property = () => {
 					</div>
 					<div className={styles.info}>
 						<div className={styles.back}>
-							<div>
-								<img src={Back.src} />
-							</div>
+							<Link href="/properties">
+								<div>
+									<img src={Back.src} />
+								</div>
+							</Link>
 						</div>
 						<div>
 							<div className={styles.name}>{details.name}</div>

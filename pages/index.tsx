@@ -10,8 +10,28 @@ import VerticalScroll from "../Components/VerticalScroll";
 import Property from "../Components/Areas/Property";
 import Area from "../Components/Areas/Area";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 
 const Home: NextPage = () => {
+	const db = getFirestore();
+	const [ids, setIds] = useState<Array<string>>([]);
+
+	useEffect(() => {
+		const q = query(collection(db, "properties"));
+		getDocs(q).then((docs) => {
+			docs.forEach((d) => {
+				const id = d.id;
+				setIds((ps) => {
+					if (ps.includes(id)) {
+						return ps;
+					} else {
+						return [...ps, id];
+					}
+				});
+			});
+		});
+	}, [db]);
 	return (
 		<div>
 			<Head>
@@ -61,30 +81,9 @@ const Home: NextPage = () => {
 					</div>
 				</div>
 				<VerticalScroll>
-					<Property
-						image={Chalet}
-						location="Cairo"
-						price={200}
-						rating={4}
-					/>
-					<Property
-						image={Chalet}
-						location="Cairo"
-						price={200}
-						rating={3}
-					/>
-					<Property
-						image={Chalet}
-						location="Cairo"
-						price={200}
-						rating={2}
-					/>
-					<Property
-						image={Chalet}
-						location="Cairo"
-						price={200}
-						rating={5}
-					/>
+					{ids.slice(0, 4).map((i) => (
+						<Property id={i} key={i} view />
+					))}
 				</VerticalScroll>
 			</div>
 		</div>
