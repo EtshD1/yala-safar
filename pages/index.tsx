@@ -52,7 +52,7 @@ const Home: NextPage = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div className={styles.search}>
-				<div>
+				{/* <div>
 					<h3>Search</h3>
 					<p>Search by location, property or address.</p>
 					<div className={styles.inputField}>
@@ -66,7 +66,7 @@ const Home: NextPage = () => {
 							/>
 						</label>
 					</div>
-				</div>
+				</div> */}
 			</div>
 			<div className={styles.areas}>
 				<div className={styles.label}>

@@ -170,12 +170,18 @@ const Navbar = () => {
 										<div>
 											<div>
 												<div>
-													<div>Settings</div>
-													<div
-														className={
-															styles.underline
-														}
-													></div>
+													<Link
+														href={`/user/${user.uid}`}
+													>
+														<>
+															<div>Profile</div>
+															<div
+																className={
+																	styles.underline
+																}
+															></div>
+														</>
+													</Link>
 												</div>
 												<div
 													className={styles.red}
@@ -235,10 +241,12 @@ const Navbar = () => {
 					{user ? (
 						<button className={styles.profile}>
 							<div className={styles.actions}>
-								<div>
-									<div>Setting</div>
-									<div className={styles.line}></div>
-								</div>
+								<Link href={`/user/${user.uid}`}>
+									<div>
+										<div>Profile</div>
+										<div className={styles.line}></div>
+									</div>
+								</Link>
 								<div className={styles.red}>
 									<div onClick={logout}>Logout</div>
 									<div className={styles.line}></div>

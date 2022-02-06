@@ -24,7 +24,7 @@ const Authentication = () => {
 
 	const uiConfig = {
 		signInFlow: "popup",
-		signInOptions: [ProviderId.GITHUB, ProviderId.GOOGLE],
+		signInOptions: [ProviderId.GOOGLE],
 		callbacks: {
 			signInSuccessWithAuthResult: () => {
 				toggleForm();
