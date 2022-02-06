@@ -16,7 +16,9 @@ const NavLink = ({
 	purple = false,
 	white = false,
 	href,
+	closeMenu,
 }: {
+	closeMenu?: () => void;
 	href: string;
 	label: string;
 	purple?: boolean;
@@ -29,6 +31,7 @@ const NavLink = ({
 					styles.navLink,
 					purple ? styles.purple : white ? styles.white : "",
 				].join(" ")}
+				onClick={closeMenu ? closeMenu : () => {}}
 			>
 				<div>
 					<div>{label}</div>
@@ -224,11 +227,16 @@ const Navbar = () => {
 							Back
 							<img src={BackIcon.src} />
 						</div>
-						<NavLink href="/" label="Home" />
+						<NavLink href="/" label="Home" closeMenu={ToggleMenu} />
 						{user ? (
 							<>
-								<NavLink href="/" label="Reservations" />
 								<NavLink
+									href="/"
+									label="Reservations"
+									closeMenu={ToggleMenu}
+								/>
+								<NavLink
+									closeMenu={ToggleMenu}
 									href="/my-properties"
 									label="Your Properties"
 									purple
@@ -242,7 +250,7 @@ const Navbar = () => {
 						<button className={styles.profile}>
 							<div className={styles.actions}>
 								<Link href={`/user/${user.uid}`}>
-									<div>
+									<div onClick={ToggleMenu}>
 										<div>Profile</div>
 										<div className={styles.line}></div>
 									</div>
