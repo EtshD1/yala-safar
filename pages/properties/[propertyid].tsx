@@ -93,28 +93,6 @@ const Property = () => {
 		}
 	}, [query, storage, db]);
 
-	if (loading) {
-		return (
-			<div className={styles.waiting}>
-				<div>
-					<Loader />
-					<div>Please Wait</div>
-				</div>
-			</div>
-		);
-	}
-
-	if (!found) {
-		return (
-			<div className={styles.waiting}>
-				<div>
-					<div>404</div>
-					<div>Property not found</div>
-				</div>
-			</div>
-		);
-	}
-
 	const deleteProperty = () => {
 		const desertRef = ref(storage, "images/desert.jpg");
 		setLoading(true);
@@ -138,6 +116,28 @@ const Property = () => {
 			dispatch(Toggle_Auth_Form());
 		}
 	};
+
+	if (loading) {
+		return (
+			<div className={styles.waiting}>
+				<div>
+					<Loader />
+					<div>Please Wait</div>
+				</div>
+			</div>
+		);
+	}
+
+	if (!found) {
+		return (
+			<div className={styles.waiting}>
+				<div>
+					<div>404</div>
+					<div>Property not found</div>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div>

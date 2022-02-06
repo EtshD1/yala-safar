@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import phoneIcon from "../../assets/icons/feather-phone.svg";
 import emailIcon from "../../assets/icons/simple-email.svg";
 import Property from "../../Components/Areas/Property";
+import Loader from "../../Components/Loader";
 import styles from "../../styles/userPage.module.scss";
 
 const User = () => {
@@ -29,6 +30,8 @@ const User = () => {
 		email: "",
 	});
 	const [props, setProps] = useState<Array<string>>([]);
+	const [loading, setLoading] = useState(true);
+	const [found, setFound] = useState(true);
 
 	useEffect(() => {
 		if (router.query.userid) {
@@ -46,6 +49,7 @@ const User = () => {
 							collection(db, "properties"),
 							where("owner", "==", router.query.userid)
 						);
+						setLoading(false);
 						getDocs(q).then((docs) => {
 							setProps([]);
 							docs.forEach((d) => {
@@ -59,11 +63,36 @@ const User = () => {
 								});
 							});
 						});
+					} else {
+						setLoading(false);
+						setFound(false);
 					}
 				}
 			);
 		}
-	}, [query, db, setUser]);
+	}, [router, db, setUser]);
+
+	if (loading) {
+		return (
+			<div className={styles.waiting}>
+				<div>
+					<Loader />
+					<div>Please Wait</div>
+				</div>
+			</div>
+		);
+	}
+
+	if (!found) {
+		return (
+			<div className={styles.waiting}>
+				<div>
+					<div>404</div>
+					<div>Property not found</div>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
