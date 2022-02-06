@@ -12,6 +12,7 @@ const BookingForm = () => {
 	const [found, setFound] = useState(true);
 	const firebaseApp = getApp();
 	const db = getFirestore(firebaseApp);
+	const [cash, setCash] = useState(true);
 	const [details, setDetails] = useState({
 		name: "",
 		city: "",
@@ -279,6 +280,57 @@ const BookingForm = () => {
 							</div>
 						</div>
 					</div>
+					<div>
+						<div className={styles.heading3}>Payment</div>
+						<div>Method:</div>
+						<div className={styles.paymentMethod}>
+							<div
+								className={cash ? styles.active : ""}
+								onClick={() => setCash(true)}
+							>
+								Cash
+							</div>
+							<div
+								className={!cash ? styles.active : ""}
+								onClick={() => setCash(false)}
+							>
+								Credit/Debit Card
+							</div>
+						</div>
+					</div>
+					{cash ? (
+						<></>
+					) : (
+						<div className={styles.cardPayment}>
+							<div>
+								<div>Card Number</div>
+								<div>
+									<input type="text" />
+								</div>
+							</div>
+							<div>
+								<div>Cardholder's Name</div>
+								<div>
+									<input type="text" />
+								</div>
+							</div>
+							<div>
+								<div>
+									<div>CVV</div>
+									<div>
+										<input type="text" />
+									</div>
+								</div>
+								<div>
+									<div>Expiry Date</div>
+									<div>
+										<input type="text" placeholder="MM" />
+										<input type="text" placeholder="YYYY" />
+									</div>
+								</div>
+							</div>
+						</div>
+					)}
 					<div className={styles.totalDays}>
 						<div>
 							<div>Total Days:{` ${totaldays + 1}`}</div>
@@ -288,6 +340,10 @@ const BookingForm = () => {
 								} E£`}
 							</div>
 						</div>
+					</div>
+					<div className={styles.actions}>
+						<div className={styles.submit}>Book Now</div>
+						<div className={styles.cancel}>Cancel</div>
 					</div>
 				</div>
 			</div>
