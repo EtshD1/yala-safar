@@ -1,7 +1,14 @@
 import { getApp } from "firebase/app";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import {
+	addDoc,
+	collection,
+	doc,
+	getDoc,
+	getFirestore,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Hide_Book_Form } from "../../redux/actions/forms";
 import { RootState } from "../../redux/reducers";
 import Loader from "../Loader";
 import styles from "./styles.module.scss";
@@ -12,6 +19,7 @@ const BookingForm = () => {
 	const [found, setFound] = useState(true);
 	const firebaseApp = getApp();
 	const db = getFirestore(firebaseApp);
+	const [complete, setComplete] = useState(false);
 	const [cash, setCash] = useState(true);
 	const [details, setDetails] = useState({
 		name: "",
@@ -28,6 +36,7 @@ const BookingForm = () => {
 		month: new Date().getMonth() + 1,
 		year: new Date().getFullYear(),
 	});
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (form.active) {
@@ -64,6 +73,20 @@ const BookingForm = () => {
 	) {
 		checkoutDays.push(i + 1);
 	}
+
+	const placeBooking = async () => {
+		await addDoc(collection(db, "reservations"), {
+			approved: false,
+			property: form.property,
+			rated: false,
+			rejected: false,
+			reserver: form.user,
+		});
+		setComplete(true);
+	};
+	const closeForm = () => {
+		dispatch(Hide_Book_Form());
+	};
 
 	useEffect(() => {
 		const co = new Date(
@@ -104,6 +127,23 @@ const BookingForm = () => {
 				<div>An error occured, please try again later.</div>
 			</div>
 		</div>;
+	}
+	if (complete) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.completed}>
+					<div>
+						<div>Booking Posted</div>
+						<p>Property owner will need to approve booking.</p>
+						<div>
+							<div className={styles.close} onClick={closeForm}>
+								Okay
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
 	}
 	return (
 		<div className={styles.container}>
@@ -342,8 +382,12 @@ const BookingForm = () => {
 						</div>
 					</div>
 					<div className={styles.actions}>
-						<div className={styles.submit}>Book Now</div>
-						<div className={styles.cancel}>Cancel</div>
+						<div className={styles.submit} onClick={placeBooking}>
+							Book Now
+						</div>
+						<div className={styles.cancel} onClick={closeForm}>
+							Cancel
+						</div>
 					</div>
 				</div>
 			</div>
