@@ -19,7 +19,8 @@ import Link from "next/link";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
-import { Toggle_Auth_Form } from "../../redux/actions/forms";
+import { Show_Book_Form, Toggle_Auth_Form } from "../../redux/actions/forms";
+import BookingForm from "../../Components/Booking";
 
 const Property = () => {
 	const { query } = useRouter();
@@ -112,6 +113,7 @@ const Property = () => {
 
 	const book = () => {
 		if (user) {
+			dispatch(Show_Book_Form(user.uid, query.propertyid!.toString()));
 		} else {
 			dispatch(Toggle_Auth_Form());
 		}
@@ -255,7 +257,9 @@ const Property = () => {
 									<Link href={`/user/${details.owner}`}>
 										<div>Contact Owner</div>
 									</Link>
-									<div className={styles.book}>Book Now</div>
+									<div className={styles.book} onClick={book}>
+										Book Now
+									</div>
 								</>
 							)
 						) : (
@@ -263,12 +267,15 @@ const Property = () => {
 								<Link href={`/user/${details.owner}`}>
 									<div>Contact Owner</div>
 								</Link>
-								<div className={styles.book}>Book Now</div>
+								<div className={styles.book} onClick={book}>
+									Book Now
+								</div>
 							</>
 						)}
 					</div>
 				</div>
 			</div>
+			<BookingForm />
 		</div>
 	);
 };

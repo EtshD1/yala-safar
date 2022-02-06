@@ -1,0 +1,83 @@
+@import "../../styles/config";
+
+.container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 20;
+	background-color: rgba(0, 0, 0, 0.5);
+
+	& > div {
+		@include container;
+		background-color: #fff;
+		height: 100%;
+	}
+
+	.waiting {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	h1 {
+		font-size: 2rem;
+		font-weight: bold;
+		text-align: center;
+		padding: 1rem 0;
+	}
+	.info {
+		margin: 0.5rem 0;
+		line-height: 1.25;
+	}
+
+	.price {
+		display: flex;
+		flex-direction: row-reverse;
+
+		div {
+			font-size: 1.1rem;
+			font-weight: 700;
+		}
+	}
+
+	.dates {
+		display: flex;
+		justify-content: space-around;
+		flex-wrap: wrap;
+
+		& > div {
+			padding: 1rem 0;
+		}
+		.dateSelection {
+			display: flex;
+
+			& > div {
+				display: flex;
+				border: 2px solid #000;
+				border-radius: 0.5rem;
+			}
+
+			.divider {
+				border-left: 2px solid #000;
+				border-right: 2px solid #000;
+			}
+
+			select {
+				background: none;
+				border: none;
+				font-size: 1.1rem;
+			}
+		}
+	}
+
+	.totalDays {
+		display: flex;
+		justify-content: flex-end;
+
+		.bold {
+			font-weight: 700;
+		}
+	}
+}
