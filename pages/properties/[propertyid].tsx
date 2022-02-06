@@ -252,13 +252,17 @@ const Property = () => {
 								</>
 							) : (
 								<>
-									<div>Contact Owner</div>
+									<Link href={`/user/${details.owner}`}>
+										<div>Contact Owner</div>
+									</Link>
 									<div className={styles.book}>Book Now</div>
 								</>
 							)
 						) : (
 							<>
-								<div>Contact Owner</div>
+								<Link href={`/user/${details.owner}`}>
+									<div>Contact Owner</div>
+								</Link>
 								<div className={styles.book}>Book Now</div>
 							</>
 						)}
