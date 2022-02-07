@@ -143,6 +143,13 @@
 			color: #fff;
 		}
 	}
+
+	.userRating {
+		padding: 1rem 0;
+		.stars {
+			display: flex;
+		}
+	}
 }
 
 .waiting {

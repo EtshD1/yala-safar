@@ -3,6 +3,7 @@ import styles from "../../styles/Property.module.scss";
 import chalet1 from "../../assets/Images/chalet1.jpg";
 import Back from "../../assets/icons/Back.svg";
 import Star from "../../assets/icons/Star.svg";
+import hollowStar from "../../assets/icons/hollowStar.svg";
 import Location from "../../assets/icons/Location.svg";
 import { useRouter } from "next/router";
 import {
@@ -13,7 +14,17 @@ import {
 } from "firebase/storage";
 import { useEffect, useState } from "react";
 import { getApp } from "firebase/app";
-import { deleteDoc, doc, getDoc, getFirestore } from "firebase/firestore";
+import {
+	collection,
+	deleteDoc,
+	doc,
+	getDoc,
+	getDocs,
+	getFirestore,
+	query as fbQuery,
+	updateDoc,
+	where,
+} from "firebase/firestore";
 import Loader from "../../Components/Loader";
 import Link from "next/link";
 import { getAuth } from "firebase/auth";
@@ -33,9 +44,25 @@ const Property = () => {
 	const [img, setImage] = useState("");
 	const [loading, setLoading] = useState(true);
 	const [found, setFound] = useState(true);
-	const [details, setDetails] = useState({
+	const [details, setDetails] = useState<{
+		name: string;
+		rating: Array<number>;
+		price: number;
+		location: string;
+		owner: string;
+		includes: {
+			beachAccess: boolean;
+			wifi: boolean;
+			privatePool: boolean;
+			roomService: boolean;
+			park: boolean;
+			market: boolean;
+			ac: boolean;
+			transportation: boolean;
+		};
+	}>({
 		name: "",
-		rating: 0,
+		rating: [],
 		price: 0,
 		location: "",
 		owner: "",
@@ -50,6 +77,12 @@ const Property = () => {
 			transportation: false,
 		},
 	});
+	const [rating, setRating] = useState({
+		done: false,
+		loading: false,
+		id: "",
+	});
+	const [userRating, setUserRating] = useState<0 | 1 | 2 | 3 | 4 | 5>(0);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -58,16 +91,12 @@ const Property = () => {
 				(doc) => {
 					if (doc.exists()) {
 						const data = doc.data();
-						const rating: [number] = data.rating;
 						setDetails({
 							name: data.name,
 							location: data.location,
 							owner: data.owner,
 							price: data.price,
-							rating:
-								rating.length > 0
-									? rating.reduce((t, v) => t + v)
-									: 0,
+							rating: data.rating,
 							includes: {
 								ac: data.ac,
 								beachAccess: data.beachAccess,
@@ -124,6 +153,64 @@ const Property = () => {
 			dispatch(Toggle_Auth_Form());
 		}
 	};
+
+	const rate = async () => {
+		if (rating.id) {
+			if (query.propertyid) {
+				const resRef = doc(db, "reservations", rating.id);
+				const propRef = doc(
+					db,
+					"properties",
+					query.propertyid.toString()
+				);
+				setRating((ps) => ({
+					done: false,
+					loading: true,
+					id: ps.id,
+				}));
+				await updateDoc(propRef, {
+					rating: [...details.rating, userRating],
+				});
+				await updateDoc(resRef, {
+					rated: true,
+				});
+				setRating((ps) => ({
+					done: true,
+					loading: false,
+					id: "",
+				}));
+				setDetails((ps) => ({
+					...ps,
+					rating: [...ps.rating, userRating],
+				}));
+			}
+		}
+	};
+
+	useEffect(() => {
+		if (user) {
+			if (query.propertyid) {
+				const q = fbQuery(
+					collection(db, "reservations"),
+					where("reserver", "==", user.uid),
+					where("property", "==", query.propertyid.toString()),
+					where("approved", "==", true),
+					where("rated", "==", false)
+				);
+				getDocs(q).then((docs) => {
+					docs.forEach((d) => {
+						if (d.exists()) {
+							setRating({
+								loading: false,
+								done: false,
+								id: d.id,
+							});
+						}
+					});
+				});
+			}
+		}
+	}, [db, user]);
 
 	if (loading) {
 		return (
@@ -188,10 +275,84 @@ const Property = () => {
 									<img src={Star.src} />
 								</div>
 								<div>
-									<div className={styles.heading}>4.9</div>
+									<div className={styles.heading}>
+										{details.rating.length > 0
+											? details.rating.reduce(
+													(t, v) => t + v
+											  ) / details.rating.length
+											: 0}
+									</div>
 								</div>
 							</div>
 						</div>
+					</div>
+					<div className={styles.userRating}>
+						{rating.loading ? (
+							<Loader />
+						) : rating.done ? (
+							<div>Thank you for your feedback!</div>
+						) : rating.id ? (
+							<>
+								<div>How would you rate this experience?</div>
+								<div
+									onMouseLeave={() => setUserRating(0)}
+									className={styles.stars}
+								>
+									<div
+										onClick={rate}
+										onMouseEnter={() => setUserRating(1)}
+									>
+										{userRating > 0 ? (
+											<img src={Star.src} />
+										) : (
+											<img src={hollowStar.src} />
+										)}
+									</div>
+									<div
+										onClick={rate}
+										onMouseEnter={() => setUserRating(2)}
+									>
+										{userRating > 1 ? (
+											<img src={Star.src} />
+										) : (
+											<img src={hollowStar.src} />
+										)}
+									</div>
+									<div
+										onClick={rate}
+										onMouseEnter={() => setUserRating(3)}
+									>
+										{userRating > 2 ? (
+											<img src={Star.src} />
+										) : (
+											<img src={hollowStar.src} />
+										)}
+									</div>
+									<div
+										onClick={rate}
+										onMouseEnter={() => setUserRating(4)}
+									>
+										{userRating > 3 ? (
+											<img src={Star.src} />
+										) : (
+											<img src={hollowStar.src} />
+										)}
+									</div>
+									<div
+										onClick={rate}
+										onMouseEnter={() => setUserRating(5)}
+									>
+										{userRating > 4 ? (
+											<img src={Star.src} />
+										) : (
+											<img src={hollowStar.src} />
+										)}
+									</div>
+								</div>
+							</>
+						) : (
+							""
+						)}
 					</div>
 					<div className={styles.offers}>
 						<div>What this place offers</div>
