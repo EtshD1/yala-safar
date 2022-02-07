@@ -150,7 +150,11 @@ const Navbar = () => {
 						<NavLink href="/" white label="Home" />
 						{user ? (
 							<>
-								<NavLink href="/" white label="Reservations" />
+								<NavLink
+									href="/reservations/my-reservations"
+									white
+									label="Reservations"
+								/>
 								<NavLink
 									href="/my-properties"
 									label="Your Properties"
@@ -231,7 +235,7 @@ const Navbar = () => {
 						{user ? (
 							<>
 								<NavLink
-									href="/"
+									href="/reservations/my-reservations"
 									label="Reservations"
 									closeMenu={ToggleMenu}
 								/>

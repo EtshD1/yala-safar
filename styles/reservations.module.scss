@@ -1,0 +1,51 @@
+@import "./config";
+
+.container {
+	display: flex;
+	justify-content: center;
+	padding-top: 3.75rem;
+
+	& > div {
+		max-width: 50rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
+		width: 100%;
+	}
+
+	.links {
+		display: flex;
+		justify-content: space-between;
+		padding: 1rem 0;
+		text-decoration: underline;
+		user-select: none;
+		cursor: pointer;
+
+		.active {
+			font-weight: bold;
+		}
+	}
+
+	.properties {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		.property > div > div {
+			gap: 0.75rem;
+			display: flex;
+		}
+
+		.status {
+			padding: 0.5rem;
+			font-size: 1.25rem;
+			color: $primary-color;
+		}
+
+		.accepted {
+			color: rgb(0, 255, 0);
+		}
+
+		.rejected {
+			color: red;
+		}
+	}
+}
