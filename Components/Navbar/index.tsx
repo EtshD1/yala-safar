@@ -176,20 +176,18 @@ const Navbar = () => {
 									<div className={styles.profileMenu}>
 										<div>
 											<div>
-												<div>
-													<Link
-														href={`/user/${user.uid}`}
-													>
-														<>
-															<div>Profile</div>
-															<div
-																className={
-																	styles.underline
-																}
-															></div>
-														</>
-													</Link>
-												</div>
+												<Link
+													href={`/user/${user.uid}`}
+												>
+													<div>
+														<div>Profile</div>
+														<div
+															className={
+																styles.underline
+															}
+														></div>
+													</div>
+												</Link>
 												<div
 													className={styles.red}
 													onClick={logout}
