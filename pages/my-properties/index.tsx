@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 const MyProperties = () => {
 	const db = getFirestore();
 	const auth = getAuth();
-	const [user, loading] = useAuthState(auth);
+	const [user] = useAuthState(auth);
 	const [ids, setIds] = useState<Array<string>>([]);
 
 	useEffect(() => {
