@@ -28,10 +28,13 @@
 	.properties {
 		display: flex;
 		flex-direction: column;
+		flex-wrap: wrap;
 		gap: 1rem;
-		.property > div > div {
-			gap: 0.75rem;
-			display: flex;
+		.property {
+			& > div > div {
+				gap: 0.75rem;
+				display: flex;
+			}
 		}
 
 		.status {
@@ -47,5 +50,16 @@
 		.rejected {
 			color: red;
 		}
+	}
+
+	.dates {
+		padding: 0.5rem;
+		padding-bottom: 0;
+	}
+}
+
+@media (min-width: 50rem) {
+	.container .properties {
+		flex-direction: row;
 	}
 }

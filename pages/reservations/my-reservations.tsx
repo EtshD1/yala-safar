@@ -23,6 +23,8 @@ const Reservations = () => {
 			property: string;
 			accepted: string;
 			rejected: string;
+			checkin: string;
+			checkout: string;
 		}>
 	>([]);
 
@@ -42,6 +44,8 @@ const Reservations = () => {
 							property: data.property,
 							rejected: data.rejected,
 							accepted: data.approved,
+							checkin: data.checkin,
+							checkout: data.checkout,
 						},
 					]);
 				});
@@ -63,6 +67,16 @@ const Reservations = () => {
 						<div key={r.property} className={styles.property}>
 							<div>
 								<Property id={r.property} />
+							</div>
+							<div className={styles.dates}>
+								<div>
+									<div>Checkin</div>
+									<div>{r.checkin}</div>
+								</div>
+								<div>
+									<div>Checkout:</div>
+									<div>{r.checkout}</div>
+								</div>
 							</div>
 							{r.accepted ? (
 								<div
