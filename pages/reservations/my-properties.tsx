@@ -2,15 +2,18 @@ import { getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {
 	collection,
+	doc,
 	getDocs,
 	getFirestore,
 	query,
+	updateDoc,
 	where,
 } from "firebase/firestore";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Property from "../../Components/Areas/Property";
+import Loader from "../../Components/Loader";
 import styles from "../../styles/reservations.module.scss";
 
 const MyPropertiesReservations = () => {
@@ -21,12 +24,57 @@ const MyPropertiesReservations = () => {
 	const [reservations, setReservations] = useState<
 		Array<{
 			property: string;
-			accepted: string;
-			rejected: string;
+			accepted: boolean;
+			rejected: boolean;
 			checkin: string;
 			checkout: string;
+			reserver: string;
+			id: string;
+			loading: boolean;
 		}>
 	>([]);
+
+	const Approve = async (rid: string) => {
+		const resRef = doc(db, "reservations", rid);
+		setReservations((ps) => {
+			const index = ps.findIndex((r) => r.id === rid);
+			const newRes = { ...ps[index] };
+			newRes.loading = true;
+
+			return [...ps.slice(0, index), newRes, ...ps.slice(index + 1)];
+		});
+		await updateDoc(resRef, {
+			approved: true,
+		});
+		setReservations((ps) => {
+			const index = ps.findIndex((r) => r.id === rid);
+			const newRes = { ...ps[index] };
+			newRes.accepted = true;
+			newRes.loading = true;
+			return [...ps.slice(0, index), newRes, ...ps.slice(index + 1)];
+		});
+	};
+
+	const Reject = async (rid: string) => {
+		const resRef = doc(db, "reservations", rid);
+		setReservations((ps) => {
+			const index = ps.findIndex((r) => r.id === rid);
+			const newRes = { ...ps[index] };
+			newRes.loading = true;
+
+			return [...ps.slice(0, index), newRes, ...ps.slice(index + 1)];
+		});
+		await updateDoc(resRef, {
+			rejected: true,
+		});
+		setReservations((ps) => {
+			const index = ps.findIndex((r) => r.id === rid);
+			const newRes = { ...ps[index] };
+			newRes.rejected = true;
+			newRes.loading = false;
+			return [...ps.slice(0, index), newRes, ...ps.slice(index + 1)];
+		});
+	};
 
 	useEffect(() => {
 		if (user) {
@@ -46,6 +94,9 @@ const MyPropertiesReservations = () => {
 							accepted: data.approved,
 							checkin: data.checkin,
 							checkout: data.checkout,
+							reserver: data.reserver,
+							id: d.id,
+							loading: false,
 						},
 					]);
 				});
@@ -64,7 +115,7 @@ const MyPropertiesReservations = () => {
 				</div>
 				<div className={styles.properties}>
 					{reservations.map((r) => (
-						<div key={r.property} className={styles.property}>
+						<div key={r.id} className={styles.property}>
 							<div>
 								<Property id={r.property} />
 							</div>
@@ -96,11 +147,27 @@ const MyPropertiesReservations = () => {
 								>
 									Rejected
 								</div>
+							) : r.loading ? (
+								<div className={styles.loading}>
+									<Loader />
+								</div>
 							) : (
 								<div className={styles.actions}>
-									<div>Contact</div>
-									<div className={styles.accept}>Accept</div>
-									<div className={styles.reject}>Reject</div>
+									<Link href={`/user/${r.reserver}`}>
+										<div>Contact</div>
+									</Link>
+									<div
+										className={styles.accept}
+										onClick={() => Approve(r.id)}
+									>
+										Accept
+									</div>
+									<div
+										onClick={() => Reject(r.id)}
+										className={styles.reject}
+									>
+										Reject
+									</div>
 								</div>
 							)}
 						</div>
