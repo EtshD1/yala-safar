@@ -20,9 +20,10 @@ const Reservations = () => {
 	const [user] = useAuthState(auth);
 	const [reservations, setReservations] = useState<
 		Array<{
+			owner: string;
 			property: string;
-			accepted: string;
-			rejected: string;
+			accepted: boolean;
+			rejected: boolean;
 			checkin: string;
 			checkout: string;
 		}>
@@ -41,6 +42,7 @@ const Reservations = () => {
 					setReservations((ps) => [
 						...ps,
 						{
+							owner: data.owner,
 							property: data.property,
 							rejected: data.rejected,
 							accepted: data.approved,
@@ -97,9 +99,16 @@ const Reservations = () => {
 									Rejected
 								</div>
 							) : (
-								<div className={styles.status}>
-									Approval Pending
-								</div>
+								<>
+									<div className={styles.status}>
+										Approval Pending
+									</div>
+									<div className={styles.actions}>
+										<Link href={`/user/${r.owner}`}>
+											<div>Contact</div>
+										</Link>
+									</div>
+								</>
 							)}
 						</div>
 					))}
