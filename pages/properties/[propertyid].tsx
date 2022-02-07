@@ -135,7 +135,17 @@ const Property = () => {
 			});
 		deleteDoc(doc(db, "properties", query.propertyid!.toString())).then(
 			() => {
-				router.push("/");
+				const q = fbQuery(
+					collection(db, "reservations"),
+					where("property", "==", query.propertyid!.toString())
+				);
+				getDocs(q).then(async (docs) => {
+					docs.forEach(async (d) => {
+						const id = d.id;
+						await deleteDoc(doc(db, "reservations", id));
+					});
+					router.push("/");
+				});
 			}
 		);
 	};
