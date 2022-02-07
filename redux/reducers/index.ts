@@ -14,5 +14,6 @@ export type RootState = {
 		active: boolean;
 		user: string;
 		property: string;
+		owner: string;
 	};
 };

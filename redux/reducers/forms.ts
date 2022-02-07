@@ -10,6 +10,7 @@ export const bookingForm: BookingForm = (
 		active: false,
 		user: "",
 		property: "",
+		owner: "",
 	},
 	action
 ) => {
@@ -17,6 +18,7 @@ export const bookingForm: BookingForm = (
 		return {
 			active: true,
 			user: action.payload.user,
+			owner: action.payload.owner,
 			property: action.payload.property,
 		};
 	}
@@ -25,6 +27,7 @@ export const bookingForm: BookingForm = (
 			active: false,
 			user: "",
 			property: "",
+			owner: "",
 		};
 	}
 	return state;

@@ -9,6 +9,7 @@ type BookingForm = (
 	state: {
 		active: boolean;
 		user: string;
+		owner: string;
 		property: string;
 	},
 	action:
@@ -17,11 +18,13 @@ type BookingForm = (
 				payload: {
 					user: string;
 					property: string;
+					owner: string;
 				};
 		  }
 		| { type: "HIDE_BOOK_FORM" }
 ) => {
 	active: boolean;
 	user: string;
+	owner: string;
 	property: string;
 };

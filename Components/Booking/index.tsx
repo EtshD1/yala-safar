@@ -81,6 +81,9 @@ const BookingForm = () => {
 			rated: false,
 			rejected: false,
 			reserver: form.user,
+			owner: form.owner,
+			checkin: `${checkin.day}/${checkin.month}/${checkin.year}`,
+			checkout: `${checkout.day}/${checkout.month}/${checkout.year}`,
 		});
 		setComplete(true);
 	};

@@ -113,7 +113,13 @@ const Property = () => {
 
 	const book = () => {
 		if (user) {
-			dispatch(Show_Book_Form(user.uid, query.propertyid!.toString()));
+			dispatch(
+				Show_Book_Form(
+					user.uid,
+					query.propertyid!.toString(),
+					details.owner
+				)
+			);
 		} else {
 			dispatch(Toggle_Auth_Form());
 		}
