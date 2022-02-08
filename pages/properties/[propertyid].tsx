@@ -139,12 +139,19 @@ const Property = () => {
 					collection(db, "reservations"),
 					where("property", "==", query.propertyid!.toString())
 				);
-				getDocs(q).then(async (docs) => {
+				getDocs(q).then((docs) => {
+					let i = 0;
 					docs.forEach(async (d) => {
+						i++;
 						const id = d.id;
 						await deleteDoc(doc(db, "reservations", id));
+						if (i === docs.size) {
+							router.push("/");
+						}
 					});
-					router.push("/");
+					if (docs.size === 0) {
+						router.push("/");
+					}
 				});
 			}
 		);
